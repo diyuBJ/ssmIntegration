@@ -174,7 +174,7 @@
      * * module `base`：WebUploader.Base
      * * module `file`: WebUploader.File
      * * module `lib/dnd`: WebUploader.Lib.Dnd
-     * * module `runtime/html5/dnd`: WebUploader.Runtime.jsp5.Dnd
+     * * module `runtime/html5/dnd`: WebUploader.Runtime.Html5.Dnd
      *
      *
      * 以下文档将可能省略`WebUploader`前缀。
@@ -413,7 +413,7 @@
             })(),
     
             /**
-             * 被[uncurrythis](http://www.2ality.com/2011/11/uncurrying-this.jsp)的数组slice方法。
+             * 被[uncurrythis](http://www.2ality.com/2011/11/uncurrying-this.html)的数组slice方法。
              * 将用来将非数组对象转化成数组对象。
              * @grammar Base.slice( target, start[, end] ) => Array
              * @method slice
@@ -1591,11 +1591,11 @@
             }
     
             opts.innerHTML = opts.innerHTML || opts.label ||
-                    opts.container.jsp() || '';
+                    opts.container.html() || '';
     
             opts.button = $( opts.button || document.createElement('div') );
-            opts.button.jsp( opts.innerHTML );
-            opts.container.jsp( opts.button );
+            opts.button.html( opts.innerHTML );
+            opts.container.html( opts.button );
     
             RuntimeClent.call( this, 'FilePicker', true );
         }
@@ -4364,7 +4364,7 @@
                     '<param name="allowscriptaccess" value="always" />' +
                 '</object>';
     
-                container.jsp( html );
+                container.html( html );
             },
     
             getFlash: function() {

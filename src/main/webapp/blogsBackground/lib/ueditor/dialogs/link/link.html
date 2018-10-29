@@ -44,7 +44,7 @@
         orgText;
     link = domUtils.findParentByTagName( link, "a", true );
     if(link){
-        url = utils.jsp(link.getAttribute( '_href' ) || link.getAttribute( 'href', 2 ));
+        url = utils.html(link.getAttribute( '_href' ) || link.getAttribute( 'href', 2 ));
 
         if(rangeLink === link && !link.getElementsByTagName('img').length){
             text.removeAttribute('disabled');

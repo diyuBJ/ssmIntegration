@@ -779,7 +779,7 @@ var utils = UE.utils = {
      * var str = '&lt;body&gt;&amp;&lt;/body&gt;';
      *
      * //output: <body>&</body>
-     * console.log( UE.utils.jsp( str ) );
+     * console.log( UE.utils.html( str ) );
      *
      * ```
      */
@@ -7218,7 +7218,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                 return '';
             }
             me.fireEvent('beforegetcontent');
-            var root = UE.jspparser(me.body.innerHTML,ignoreBlank);
+            var root = UE.htmlparser(me.body.innerHTML,ignoreBlank);
             me.filterOutputRule(root);
             me.fireEvent('aftergetcontent', cmd,root);
             return  root.toHtml(formatter);
@@ -7321,7 +7321,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
             var me = this;
 
             me.fireEvent('beforesetcontent', html);
-            var root = UE.jspparser(html);
+            var root = UE.htmlparser(html);
             me.filterInputRule(root);
             html = root.toHtml();
 
@@ -8654,7 +8654,7 @@ var filterWord = UE.filterWord = function () {
     //支持标签和html
     uNode.createElement = function (html) {
         if (/[<>]/.test(html)) {
-            return UE.jspparser(html).children[0]
+            return UE.htmlparser(html).children[0]
         } else {
             return new uNode({
                 type:'element',
@@ -8698,7 +8698,7 @@ var filterWord = UE.filterWord = function () {
             //源码模式下输入html标签，不能做转换处理，直接输出
             arr.push(node.data)
         }else{
-            arr.push(notTransTagName[node.parentNode.tagName] ? utils.jsp(node.data) : node.data.replace(/[ ]{2}/g,' &nbsp;'))
+            arr.push(notTransTagName[node.parentNode.tagName] ? utils.html(node.data) : node.data.replace(/[ ]{2}/g,' &nbsp;'))
         }
 
     }
@@ -8713,7 +8713,7 @@ var filterWord = UE.filterWord = function () {
                 //<p>'<img src='http://nsclick.baidu.com/u.gif?&asdf=\"sdf&asdfasdfs;asdf'></p>
                 //这里边的\"做转换，要不用innerHTML直接被截断了，属性src
                 //有可能做的不够
-                attrhtml.push(a + (attrs[a] !== undefined ? '="' + (notTransAttrs[a] ? utils.jsp(attrs[a]).replace(/["]/g, function (a) {
+                attrhtml.push(a + (attrs[a] !== undefined ? '="' + (notTransAttrs[a] ? utils.html(attrs[a]).replace(/["]/g, function (a) {
                    return '&quot;'
                 }) : utils.unhtml(attrs[a])) + '"' : ''))
             }
@@ -8859,7 +8859,7 @@ var filterWord = UE.filterWord = function () {
                     }
                 }
                 this.children = [];
-                var tmpRoot = UE.jspparser(htmlstr);
+                var tmpRoot = UE.htmlparser(htmlstr);
                 for (var i = 0, ci; ci = tmpRoot.children[i++];) {
                     this.children.push(ci);
                     ci.parentNode = this;
@@ -9355,11 +9355,11 @@ var filterWord = UE.filterWord = function () {
  * @return { uNode } 给定的html片段转换形成的uNode对象
  * @example
  * ```javascript
- * var root = UE.jspparser('<p><b>htmlparser</b></p>', true);
+ * var root = UE.htmlparser('<p><b>htmlparser</b></p>', true);
  * ```
  */
 
-var htmlparser = UE.jspparser = function (htmlstr,ignoreBlank) {
+var htmlparser = UE.htmlparser = function (htmlstr,ignoreBlank) {
     //todo 原来的方式  [^"'<>\/] 有\/就不能配对上 <TD vAlign=top background=../AAA.JPG> 这样的标签了
     //先去掉了，加上的原因忘了，这里先记录
     var re_tag = /<(?:(?:\/([^>]+)>)|(?:!--([\S|\s]*?)-->)|(?:([^\s\/<>]+)\s*((?:(?:"[^"]*")|(?:'[^']*')|[^"'<>])*)\/?>))/g,
@@ -10141,7 +10141,7 @@ UE.plugins['defaultfilter'] = function () {
                     case 'a':
                         if (val = node.getAttr('_href')) {
                             node.setAttr({
-                                'href': utils.jsp(val),
+                                'href': utils.html(val),
                                 '_href': ''
                             })
                         }
@@ -10217,7 +10217,7 @@ UE.commands['inserthtml'] = {
         div.style.display = 'inline';
 
         if (!notNeedFilter) {
-            var root = UE.jspparser(html);
+            var root = UE.htmlparser(html);
             //如果给了过滤规则就先进行过滤
             if(me.options.filterRules){
                 UE.filterNode(root,me.options.filterRules);
@@ -10527,7 +10527,7 @@ UE.plugins['autotypeset'] = function(){
                 return;
             }
             cont = me.document.createElement('div');
-            cont.innerHTML = html.jsp;
+            cont.innerHTML = html.html;
         }else{
             cont = me.document.body;
         }
@@ -10675,7 +10675,7 @@ UE.plugins['autotypeset'] = function(){
             }
         }
         if(opt.tobdc){
-            var root = UE.jspparser(cont.innerHTML);
+            var root = UE.htmlparser(cont.innerHTML);
             root.traversal(function(node){
                 if(node.type == 'text'){
                     node.data = ToDBC(node.data)
@@ -10684,7 +10684,7 @@ UE.plugins['autotypeset'] = function(){
             cont.innerHTML = root.toHtml()
         }
         if(opt.bdc2sb){
-            var root = UE.jspparser(cont.innerHTML);
+            var root = UE.htmlparser(cont.innerHTML);
             root.traversal(function(node){
                 if(node.type == 'text'){
                     node.data = DBC2SB(node.data)
@@ -10693,7 +10693,7 @@ UE.plugins['autotypeset'] = function(){
             cont.innerHTML = root.toHtml()
         }
         if(html){
-            html.jsp = cont.innerHTML;
+            html.html = cont.innerHTML;
         }
     }
     if(opt.pasteFilter){
@@ -10717,7 +10717,7 @@ UE.plugins['autotypeset'] = function(){
         return result;
     }
     function ToDBC(txtstring) {
-        txtstring = utils.jsp(txtstring);
+        txtstring = utils.html(txtstring);
         var tmp = "";
         var mark = "";/*用于判断,如果是html尖括里的标记,则不进行全角的转换*/
         for (var i = 0; i < txtstring.length; i++) {
@@ -11878,7 +11878,7 @@ UE.plugins['link'] = function(){
         if(start.nodeType == 1 && link){
             start = start.childNodes[range.startOffset];
             if(start && start.nodeType == 1 && start.tagName == 'A' && /^(?:https?|ftp|file)\s*:\s*\/\//.test(start[browser.ie?'innerText':'textContent'])){
-                start[browser.ie ? 'innerText' : 'textContent'] =  utils.jsp(opt.textValue||opt.href);
+                start[browser.ie ? 'innerText' : 'textContent'] =  utils.html(opt.textValue||opt.href);
 
             }
         }
@@ -11892,10 +11892,10 @@ UE.plugins['link'] = function(){
                 text = '';
             if(opt.textValue){
 
-                text =   utils.jsp(opt.textValue);
+                text =   utils.html(opt.textValue);
                 delete opt.textValue;
             }else{
-                text =   utils.jsp(opt.href);
+                text =   utils.html(opt.href);
 
             }
             domUtils.setAttributes( a, opt );
@@ -13195,7 +13195,7 @@ UE.plugins['insertcode'] = function() {
                     var div = me.document.createElement('div');
                     div.appendChild(frag);
 
-                    utils.each(UE.filterNode(UE.jspparser(div.innerHTML.replace(/[\r\t]/g,'')),me.options.filterTxtRules).children,function(node){
+                    utils.each(UE.filterNode(UE.htmlparser(div.innerHTML.replace(/[\r\t]/g,'')),me.options.filterTxtRules).children,function(node){
                         if(browser.ie && browser.ie11below && browser.version > 8){
 
                             if(node.type =='element'){
@@ -13551,7 +13551,7 @@ UE.plugins['insertcode'] = function() {
             var htmlstr = '';
             if(browser.ie && browser.version > 8){
 
-                utils.each(UE.filterNode(UE.jspparser(html),me.options.filterTxtRules).children,function(node){
+                utils.each(UE.filterNode(UE.htmlparser(html),me.options.filterTxtRules).children,function(node){
                     if(node.type =='element'){
                         if(node.tagName == 'br'){
                             htmlstr += '\n'
@@ -13578,12 +13578,12 @@ UE.plugins['insertcode'] = function() {
                         htmlstr = htmlstr.replace(/\n$/,'');
                     }
                 });
-                var tmpNode = me.document.createTextNode(utils.jsp(htmlstr.replace(/&nbsp;/g,' ')));
+                var tmpNode = me.document.createTextNode(utils.html(htmlstr.replace(/&nbsp;/g,' ')));
                 rng.insertNode(tmpNode).selectNode(tmpNode).select();
             }else{
                 var frag = me.document.createDocumentFragment();
 
-                utils.each(UE.filterNode(UE.jspparser(html),me.options.filterTxtRules).children,function(node){
+                utils.each(UE.filterNode(UE.htmlparser(html),me.options.filterTxtRules).children,function(node){
                     if(node.type =='element'){
                         if(node.tagName == 'br'){
                             frag.appendChild(me.document.createElement('br'))
@@ -13594,11 +13594,11 @@ UE.plugins['insertcode'] = function() {
 
                                         frag.appendChild(me.document.createElement('br'))
                                     }else if(!dtd.$empty[node.tagName]){
-                                        frag.appendChild(me.document.createTextNode(utils.jsp(cn.innerText().replace(/&nbsp;/g,' '))));
+                                        frag.appendChild(me.document.createTextNode(utils.html(cn.innerText().replace(/&nbsp;/g,' '))));
 
                                     }
                                 }else{
-                                    frag.appendChild(me.document.createTextNode(utils.jsp( cn.data.replace(/&nbsp;/g,' '))));
+                                    frag.appendChild(me.document.createTextNode(utils.html( cn.data.replace(/&nbsp;/g,' '))));
 
                                 }
                             })
@@ -13607,7 +13607,7 @@ UE.plugins['insertcode'] = function() {
                             }
                         }
                     }else{
-                        frag.appendChild(me.document.createTextNode(utils.jsp( node.data.replace(/&nbsp;/g,' '))));
+                        frag.appendChild(me.document.createTextNode(utils.html( node.data.replace(/&nbsp;/g,' '))));
                     }
                     if(!node.nextSibling() && frag.lastChild.nodeName == 'BR'){
                        frag.removeChild(frag.lastChild)
@@ -14192,7 +14192,7 @@ UE.plugins['undo'] = function () {
         this.restore = function () {
             var me = this.editor;
             var scene = this.list[this.index];
-            var root = UE.jspparser(scene.content.replace(fillchar, ''));
+            var root = UE.htmlparser(scene.content.replace(fillchar, ''));
             me.options.autoClearEmptyNode = false;
             me.filterInputRule(root);
             me.options.autoClearEmptyNode = orgState;
@@ -14225,7 +14225,7 @@ UE.plugins['undo'] = function () {
             var rng = me.selection.getRange(),
                 rngAddress = rng.createAddress(false,true);
             me.fireEvent('beforegetscene');
-            var root = UE.jspparser(me.body.innerHTML);
+            var root = UE.htmlparser(me.body.innerHTML);
             me.options.autoClearEmptyNode = false;
             me.filterOutputRule(root);
             me.options.autoClearEmptyNode = orgState;
@@ -14624,7 +14624,7 @@ UE.plugins['paste'] = function () {
             //过滤word粘贴过来的冗余属性
             html = UE.filterWord(html);
             //取消了忽略空白的第二个参数，粘贴过来的有些是有空白的，会被套上相关的标签
-            var root = UE.jspparser(html);
+            var root = UE.htmlparser(html);
             //如果给了过滤规则就先进行过滤
             if (me.options.filterRules) {
                 UE.filterNode(root, me.options.filterRules);
@@ -14646,10 +14646,10 @@ UE.plugins['paste'] = function () {
             html = {'html': root.toHtml()};
             me.fireEvent('beforepaste', html, root);
             //抢了默认的粘贴，那后边的内容就不执行了，比如表格粘贴
-            if(!html.jsp){
+            if(!html.html){
                 return;
             }
-            root = UE.jspparser(html.jsp,true);
+            root = UE.htmlparser(html.html,true);
             //如果开启了纯文本模式
             if (me.queryCommandState('pasteplain') === 1) {
                 me.execCommand('insertHtml', UE.filterNode(root, me.options.filterTxtRules).toHtml(), true);
@@ -14658,7 +14658,7 @@ UE.plugins['paste'] = function () {
                 UE.filterNode(root, me.options.filterTxtRules);
                 txtContent = root.toHtml();
                 //完全模式
-                htmlContent = html.jsp;
+                htmlContent = html.html;
 
                 address = me.selection.getRange().createAddress(true);
                 me.execCommand('insertHtml', me.getOpt('retainOnlyLabelPasted') === true ?  getPureHtml(htmlContent) : htmlContent, true);
@@ -15046,7 +15046,7 @@ UE.plugins['list'] = function () {
     me.addListener('beforepaste',function(type,html){
         var me = this,
             rng = me.selection.getRange(),li;
-        var root = UE.jspparser(html.jsp,true);
+        var root = UE.htmlparser(html.html,true);
         if(li = domUtils.findParentByTagName(rng.startContainer,'li',true)){
             var list = li.parentNode,tagName = list.tagName == 'OL' ? 'ul':'ol';
             utils.each(root.getNodesByTagName(tagName),function(n){
@@ -15079,7 +15079,7 @@ UE.plugins['list'] = function () {
 
         }
 
-        html.jsp = root.toHtml();
+        html.html = root.toHtml();
     });
     //导出时，去掉p标签
     me.getOpt('disablePInList') === true && me.addOutputRule(function(root){
@@ -16271,7 +16271,7 @@ UE.plugins['list'] = function () {
 
 
                     me.fireEvent('beforegetcontent');
-                    var root = UE.jspparser(me.body.innerHTML);
+                    var root = UE.htmlparser(me.body.innerHTML);
                     me.filterOutputRule(root);
                     root.traversal(function (node) {
                         if (node.type == 'element') {
@@ -16304,7 +16304,7 @@ UE.plugins['list'] = function () {
 
                     me.setContent = function(html){
                         //这里暂时不触发事件，防止报错
-                        var root = UE.jspparser(html);
+                        var root = UE.htmlparser(html);
                         me.filterInputRule(root);
                         html = root.toHtml();
                         sourceEditor.setContent(html);
@@ -17234,8 +17234,8 @@ UE.plugin.register('autolink',function(){
                             a.href = a.innerHTML = a.innerHTML.replace(/<[^>]+>/g,'');
                             href = a.getAttribute("href").replace(new RegExp(domUtils.fillChar,'g'),'');
                             href = /^(?:https?:\/\/)/ig.test(href) ? href : "http://"+ href;
-                            a.setAttribute('_src',utils.jsp(href));
-                            a.href = utils.jsp(href);
+                            a.setAttribute('_src',utils.html(href));
+                            a.href = utils.html(href);
 
                             range.insertNode(a);
                             a.parentNode.insertBefore(text, a.nextSibling);
@@ -17604,7 +17604,7 @@ UE.plugins['video'] = function (){
                 break;
             case 'embed':
                 str = '<embed type="application/x-shockwave-flash" class="' + classname + '" pluginspage="http://www.macromedia.com/go/getflashplayer"' +
-                    ' src="' +  utils.jsp(url) + '" width="' + width  + '" height="' + height  + '"'  + (align ? ' style="float:' + align + '"': '') +
+                    ' src="' +  utils.html(url) + '" width="' + width  + '" height="' + height  + '"'  + (align ? ' style="float:' + align + '"': '') +
                     ' wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true" >';
                 break;
             case 'video':
@@ -20057,9 +20057,9 @@ UE.plugins['table'] = function () {
             var rng = me.selection.getRange();
             if (domUtils.findParentByTagName(rng.startContainer, 'caption', true)) {
                 var div = me.document.createElement("div");
-                div.innerHTML = html.jsp;
+                div.innerHTML = html.html;
                 //trace:3729
-                html.jsp = div[browser.ie9below ? 'innerText' : 'textContent'];
+                html.html = div[browser.ie9below ? 'innerText' : 'textContent'];
                 return;
             }
             var table = getUETableBySelected(me);
@@ -20168,11 +20168,11 @@ UE.plugins['table'] = function () {
                 }
                 me.fireEvent('contentchange');
                 me.fireEvent('saveScene');
-                html.jsp = '';
+                html.html = '';
                 return true;
             } else {
                 var div = me.document.createElement("div"), tables;
-                div.innerHTML = html.jsp;
+                div.innerHTML = html.html;
                 tables = div.getElementsByTagName("table");
                 if (domUtils.findParentByTagName(me.selection.getStart(), 'table')) {
                     utils.each(tables, function (t) {
@@ -20194,7 +20194,7 @@ UE.plugins['table'] = function () {
                         });
                     });
                 }
-                html.jsp = div.innerHTML;
+                html.html = div.innerHTML;
             }
         });
 
@@ -23558,7 +23558,7 @@ UE.plugin.register('webapp', function (){
 UE.plugins['template'] = function () {
     UE.commands['template'] = {
         execCommand:function (cmd, obj) {
-            obj.jsp && this.execCommand("inserthtml", obj.jsp);
+            obj.html && this.execCommand("inserthtml", obj.html);
         }
     };
     this.addListener("click", function (type, evt) {
@@ -27183,8 +27183,8 @@ UE.ui = baidu.editor.ui = {};
                 //还原环境
                 if ( this.fullscreen ) {
 
-                    document.documentElement.style.overflowX = this._originalContext.jsp.overflowX;
-                    document.documentElement.style.overflowY = this._originalContext.jsp.overflowY;
+                    document.documentElement.style.overflowX = this._originalContext.html.overflowX;
+                    document.documentElement.style.overflowY = this._originalContext.html.overflowY;
                     document.body.style.overflowX = this._originalContext.body.overflowX;
                     document.body.style.overflowY = this._originalContext.body.overflowY;
                     delete this._originalContext;

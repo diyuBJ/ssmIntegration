@@ -1,18 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Geni
-  Date: 2018/10/29
-  Time: 16:13
+  User: Administrator
+  Date: 2018/10/26
+  Time: 14:56
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>修改栏目 - 异清轩博客管理系统</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -281,3 +276,4 @@
 <script src="js/admin-scripts.js"></script>
 </body>
 </html>
+

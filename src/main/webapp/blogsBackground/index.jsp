@@ -1,18 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Geni
-  Date: 2018/10/29
-  Time: 16:11
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>异清轩博客管理系统</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -27,7 +16,7 @@
     <script src="js/selectivizr-min.js" type="text/javascript"></script>
     <![endif]-->
     <!--[if lt IE 9]>
-    <script>window.location.href='upgrade-browser.jsp';</script>
+    <!--<script>window.location.href='upgrade-browser.jsp';</script>-->
     <![endif]-->
 </head>
 
@@ -65,12 +54,12 @@
     <div class="row">
         <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="index.jsp">报告</a></li>
+                <li ><a href="#" onclick="loads('top.jsp')">报告</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="article.jsp">文章</a></li>
-                <li><a href="notice.jsp">公告</a></li>
-                <li><a href="comment.jsp">评论</a></li>
+                <li><a href="#" onclick="loads('article.jsp')">文章</a></li>
+
+                <li><a href="#" onclick="loads('notice.jsp')">公告</a></li>
                 <li><a data-toggle="tooltip" data-placement="bottom" title="网站暂无留言功能">留言</a></li>
             </ul>
             <ul class="nav nav-sidebar">
@@ -198,6 +187,8 @@
             </footer>
         </div>
     </div>
+
+
 </section>
 <!--个人信息模态框-->
 <div class="modal fade" id="seeUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -340,5 +331,12 @@
 </div>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/admin-scripts.js"></script>
+<script >
+    //导入页面
+    function loads(url) {
+        $("#main").html("");
+        $("#main").load(url);
+    }
+</script>
 </body>
 </html>

@@ -56,7 +56,7 @@ function initChartsTypeView () {
 
     }
 
-    $( "#scrollBed" ).jsp( contents.join( "" ) );
+    $( "#scrollBed" ).html( contents.join( "" ) );
 
 }
 
@@ -94,7 +94,7 @@ function renderTable ( table ) {
     }
 
     //draw 表格
-    $( "#tableContainer" ).jsp( '<table id="showTable" border="1"><tbody><tr>'+ tableHtml.join( "</tr><tr>" ) +'</tr></tbody></table>' );
+    $( "#tableContainer" ).html( '<table id="showTable" border="1"><tbody><tr>'+ tableHtml.join( "</tr><tr>" ) +'</tr></tbody></table>' );
 
 }
 

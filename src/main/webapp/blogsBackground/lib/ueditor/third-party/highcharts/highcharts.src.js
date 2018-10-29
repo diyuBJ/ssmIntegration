@@ -2841,7 +2841,7 @@ SVGElement.prototype = {
 			// VML Renderer or useHTML within SVG
 			} else {
 
-				bBox = wrapper.jspGetBBox();
+				bBox = wrapper.htmlGetBBox();
 
 			}
 
@@ -4054,7 +4054,7 @@ SVGRenderer.prototype = {
 			wrapper;
 
 		if (useHTML && !renderer.forExport) {
-			return renderer.jsp(str, x, y);
+			return renderer.html(str, x, y);
 		}
 
 		x = mathRound(pick(x, 0));
@@ -4114,7 +4114,7 @@ SVGRenderer.prototype = {
 				key = 'textAlign'; // Do not overwrite the SVGElement.align method. Same as VML.
 			}
 			wrapper[key] = value;
-			wrapper.jspUpdateTransform();
+			wrapper.htmlUpdateTransform();
 			return false;
 		};
 
@@ -4132,7 +4132,7 @@ SVGRenderer.prototype = {
 			});
 
 		// Use the HTML specific .css method
-		wrapper.css = wrapper.jspCss;
+		wrapper.css = wrapper.htmlCss;
 
 		// This is specific for HTML within SVG
 		if (renderer.isSVG) {
@@ -4200,7 +4200,7 @@ SVGRenderer.prototype = {
 				// Shared with VML:
 				wrapper.added = true;
 				if (wrapper.alignOnAdd) {
-					wrapper.jspUpdateTransform();
+					wrapper.htmlUpdateTransform();
 				}
 
 				return wrapper;
@@ -4617,7 +4617,7 @@ Highcharts.VMLElement = VMLElement = {
 	/**
 	 * VML always uses htmlUpdateTransform
 	 */
-	updateTransform: SVGElement.prototype.jspUpdateTransform,
+	updateTransform: SVGElement.prototype.htmlUpdateTransform,
 
 	/**
 	 * Set the rotation of a span with oldIE's filter
@@ -4944,7 +4944,7 @@ Highcharts.VMLElement = VMLElement = {
 	 * Set styles for the element
 	 * @param {Object} styles
 	 */
-	css: SVGElement.prototype.jspCss,
+	css: SVGElement.prototype.htmlCss,
 
 	/**
 	 * Removes a child either by removeChild or move to garbageBin.
@@ -5400,7 +5400,7 @@ var VMLRendererExtension = { // inherit SVGRenderer
 	 * @param {Number} x
 	 * @param {Number} y
 	 */
-	text: SVGRenderer.prototype.jsp,
+	text: SVGRenderer.prototype.html,
 
 	/**
 	 * Create and return a path element
@@ -11946,7 +11946,7 @@ Chart.prototype = {
 				delete style.top;
 
 				renderer.text(
-					label.jsp,
+					label.html,
 					x,
 					y
 				)

@@ -975,7 +975,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
                 // Instantiate a brush
                 if (params['html-script'] == 'true' || sh.defaults['html-script'] == true)
                 {
-                    highlighter = new sh.jspScript(brushName);
+                    highlighter = new sh.HtmlScript(brushName);
                     brushName = 'htmlscript';
                 }
                 else
@@ -1841,7 +1841,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
      *
      * @param {String} scriptBrushName Brush name of the scripting language.
      */
-    sh.jspScript = function(scriptBrushName)
+    sh.HtmlScript = function(scriptBrushName)
     {
         var brushClass = findBrush(scriptBrushName),
             scriptBrush,
@@ -1867,14 +1867,14 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
                 };
             })();
 
-        if (scriptBrush.jspScript == null)
+        if (scriptBrush.htmlScript == null)
         {
             alert(sh.config.strings.brushNotHtmlScript + scriptBrushName);
             return;
         }
 
         xmlBrush.regexList.push(
-            { regex: scriptBrush.jspScript.code, func: process }
+            { regex: scriptBrush.htmlScript.code, func: process }
         );
 
         function offsetMatches(matches, offset)
@@ -1889,7 +1889,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
                 matches = [],
                 regexList = scriptBrush.regexList,
                 offset = match.index + match.left.length,
-                htmlScript = scriptBrush.jspScript,
+                htmlScript = scriptBrush.htmlScript,
                 result
                 ;
 
@@ -2361,7 +2361,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
             if(regexGroup.eof)
                 regex.end = "(?:(?:" + regex.end + ")|$)";
 
-            this.jspScript = {
+            this.htmlScript = {
                 left : { regex: regexGroup.left, css: 'script' },
                 right : { regex: regexGroup.right, css: 'script' },
                 code : new XRegExp(
@@ -2887,9 +2887,9 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	function Brush()
 	{
 		// Contributed by Jean-Lou Dupont
-		// http://jldupont.blogspot.com/2009/06/erlang-syntax-highlighter.jsp
+		// http://jldupont.blogspot.com/2009/06/erlang-syntax-highlighter.html  
 
-		// According to: http://erlang.org/doc/reference_manual/introduction.jsp#1.5
+		// According to: http://erlang.org/doc/reference_manual/introduction.html#1.5
 		var keywords = 'after and andalso band begin bnot bor bsl bsr bxor '+
 			'case catch cond div end fun if let not of or orelse '+
 			'query receive rem try when xor'+
@@ -3015,7 +3015,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	function Brush()
 	{
 		// Contributed by Patrick Webster
-		// http://patrickwebster.blogspot.com/2009/04/javafx-brush-for-syntaxhighlighter.jsp
+		// http://patrickwebster.blogspot.com/2009/04/javafx-brush-for-syntaxhighlighter.html
 		var datatypes =	'Boolean Byte Character Double Duration '
 						+ 'Float Integer Long Number Short String Void'
 						;

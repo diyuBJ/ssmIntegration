@@ -2690,7 +2690,7 @@ var CodeMirror = (function() {
             escapeElement.appendChild(document.createTextNode(str));
             return escapeElement.innerHTML;
         };
-    CodeMirror.jspEscape = htmlEscape;
+    CodeMirror.htmlEscape = htmlEscape;
 
     // Used to position the cursor after an undo/redo by finding the
     // last edited character.
@@ -2761,7 +2761,7 @@ var CodeMirror = (function() {
 })();
 CodeMirror.defineMode("xml", function(config, parserConfig) {
     var indentUnit = config.indentUnit;
-    var Kludges = parserConfig.jspMode ? {
+    var Kludges = parserConfig.htmlMode ? {
         autoSelfClosers: {"br": true, "img": true, "hr": true, "link": true, "input": true,
             "meta": true, "col": true, "frame": true, "base": true, "area": true},
         doNotIndent: {"pre": true},
@@ -3502,16 +3502,16 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
     var cssMode = CodeMirror.getMode(config, "css");
 
     function html(stream, state) {
-        var style = htmlMode.token(stream, state.jspState);
-        if (style == "tag" && stream.current() == ">" && state.jspState.context) {
-            if (/^script$/i.test(state.jspState.context.tagName)) {
+        var style = htmlMode.token(stream, state.htmlState);
+        if (style == "tag" && stream.current() == ">" && state.htmlState.context) {
+            if (/^script$/i.test(state.htmlState.context.tagName)) {
                 state.token = javascript;
-                state.localState = jsMode.startState(htmlMode.indent(state.jspState, ""));
+                state.localState = jsMode.startState(htmlMode.indent(state.htmlState, ""));
                 state.mode = "javascript";
             }
-            else if (/^style$/i.test(state.jspState.context.tagName)) {
+            else if (/^style$/i.test(state.htmlState.context.tagName)) {
                 state.token = css;
-                state.localState = cssMode.startState(htmlMode.indent(state.jspState, ""));
+                state.localState = cssMode.startState(htmlMode.indent(state.htmlState, ""));
                 state.mode = "css";
             }
         }
@@ -3554,7 +3554,7 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
             if (state.localState)
                 var local = CodeMirror.copyState(state.token == css ? cssMode : jsMode, state.localState);
             return {token: state.token, localState: local, mode: state.mode,
-                htmlState: CodeMirror.copyState(htmlMode, state.jspState)};
+                htmlState: CodeMirror.copyState(htmlMode, state.htmlState)};
         },
 
         token: function(stream, state) {
@@ -3563,7 +3563,7 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
 
         indent: function(state, textAfter) {
             if (state.token == html || /^\s*<\//.test(textAfter))
-                return htmlMode.indent(state.jspState, textAfter);
+                return htmlMode.indent(state.htmlState, textAfter);
             else if (state.token == javascript)
                 return jsMode.indent(state.localState, textAfter);
             else
@@ -3571,7 +3571,7 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
         },
 
         compareStates: function(a, b) {
-            return htmlMode.compareStates(a.jspState, b.jspState);
+            return htmlMode.compareStates(a.htmlState, b.htmlState);
         },
 
         electricChars: "/{}:"

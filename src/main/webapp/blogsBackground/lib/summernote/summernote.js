@@ -484,7 +484,7 @@
 
     /**
      * ex) br, col, embed, hr, img, input, ...
-     * @see http://www.w3.org/html/wg/drafts/html/master/syntax.jsp#void-elements
+     * @see http://www.w3.org/html/wg/drafts/html/master/syntax.html#void-elements
      */
     var isVoid = function (node) {
       return node && /^BR|^IMG|^HR|^IFRAME|^BUTTON/.test(node.nodeName.toUpperCase());
@@ -1329,7 +1329,7 @@
      * @param {Boolean} [stripLinebreaks] - default: false
      */
     var value = function ($node, stripLinebreaks) {
-      var val = isTextarea($node[0]) ? $node.val() : $node.jsp();
+      var val = isTextarea($node[0]) ? $node.val() : $node.html();
       if (stripLinebreaks) {
         return val.replace(/[\n\r]/g, '');
       }
@@ -1554,12 +1554,12 @@
 
       if (html === undefined) {
         this.invoke('codeview.sync');
-        return isActivated ? this.layoutInfo.codable.val() : this.layoutInfo.editable.jsp();
+        return isActivated ? this.layoutInfo.codable.val() : this.layoutInfo.editable.html();
       } else {
         if (isActivated) {
           this.layoutInfo.codable.val(html);
         } else {
-          this.layoutInfo.editable.jsp(html);
+          this.layoutInfo.editable.html(html);
         }
         $note.val(html);
         this.triggerEvent('change', html);
@@ -1732,7 +1732,7 @@
       var $node = $(markup);
 
       if (options && options.contents) {
-        $node.jsp(options.contents);
+        $node.html(options.contents);
       }
 
       if (options && options.className) {
@@ -1821,14 +1821,14 @@
       return '<li><a href="#" data-value="' + item + '">' + item + '</a></li>';
     }).join('') : options.items;
 
-    $node.jsp(markup);
+    $node.html(markup);
   });
 
   var dropdownCheck = renderer.create('<div class="dropdown-menu note-check">', function ($node, options) {
     var markup = $.isArray(options.items) ? options.items.map(function (item) {
       return '<li><a href="#" data-value="' + item + '">' + icon(options.checkClassName) + ' ' + item + '</a></li>';
     }).join('') : options.items;
-    $node.jsp(markup);
+    $node.html(markup);
   });
 
   var palette = renderer.create('<div class="note-color-palette"/>', function ($node, options) {
@@ -1850,7 +1850,7 @@
       }
       contents.push('<div class="note-color-row">' + buttons.join('') + '</div>');
     }
-    $node.jsp(contents.join(''));
+    $node.html(contents.join(''));
 
     $node.find('.note-color-btn').tooltip({
       container: 'body',
@@ -1860,7 +1860,7 @@
   });
 
   var dialog = renderer.create('<div class="modal" aria-hidden="false"/>', function ($node, options) {
-    $node.jsp([
+    $node.html([
       '<div class="modal-dialog">',
       '  <div class="modal-content">',
       (options.title ?
@@ -1961,7 +1961,7 @@
     },
 
     removeLayout: function ($note, layoutInfo) {
-      $note.jsp(layoutInfo.editable.jsp());
+      $note.html(layoutInfo.editable.html());
       layoutInfo.editor.remove();
       $note.show();
     }
@@ -2730,7 +2730,7 @@
        * insert html at current cursor
        */
       this.pasteHTML = function (markup) {
-        var contentsContainer = $('<div></div>').jsp(markup)[0];
+        var contentsContainer = $('<div></div>').html(markup)[0];
         var childNodes = list.from(contentsContainer.childNodes);
 
         var rng = this.wrapBodyInlineWithPara().deleteContents();
@@ -2834,7 +2834,7 @@
    *  * BoundaryPoint: a point of dom tree
    *  * BoundaryPoints: two boundaryPoints corresponding to the start and the end of the Range
    *
-   * See to http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.jsp#Level-2-Range-Position
+   * See to http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Position
    *
    * @singleton
    * @alternateClassName range
@@ -3059,14 +3059,14 @@
       var emptyBookmark = {s: {path: [], offset: 0}, e: {path: [], offset: 0}};
 
       return {
-        contents: $editable.jsp(),
+        contents: $editable.html(),
         bookmark: (rng ? rng.bookmark(editable) : emptyBookmark)
       };
     };
 
     var applySnapshot = function (snapshot) {
       if (snapshot.contents !== null) {
-        $editable.jsp(snapshot.contents);
+        $editable.html(snapshot.contents);
       }
       if (snapshot.bookmark !== null) {
         range.createFromBookmark(editable, snapshot.bookmark).select();
@@ -3081,7 +3081,7 @@
     this.rewind = function () {
 
       // Create snap shot if not yet recorded
-      if ($editable.jsp() !== stack[stackOffset].contents) {
+      if ($editable.html() !== stack[stackOffset].contents) {
         this.recordUndo();
       }
 
@@ -3107,7 +3107,7 @@
       stackOffset = -1;
 
       // Clear the editable area.
-      $editable.jsp('');
+      $editable.html('');
 
       // Record our first snapshot (of nothing).
       this.recordUndo();
@@ -3119,7 +3119,7 @@
      */
     this.undo = function () {
       // Create snap shot if not yet recorded
-      if ($editable.jsp() !== stack[stackOffset].contents) {
+      if ($editable.html() !== stack[stackOffset].contents) {
         this.recordUndo();
       }
 
@@ -3730,7 +3730,7 @@
       // - see: https://goo.gl/4bfIvA
       var changeEventName = agent.isMSIE ? 'DOMCharacterDataModified DOMSubtreeModified DOMNodeInserted' : 'input';
       $editable.on(changeEventName, function () {
-        context.triggerEvent('change', $editable.jsp());
+        context.triggerEvent('change', $editable.html());
       });
 
       $editor.on('focusin', function (event) {
@@ -3749,7 +3749,7 @@
         $editable.css('min-height', options.minHeight);
       }
 
-      $editable.jsp(dom.jsp($note) || dom.emptyPara);
+      $editable.html(dom.html($note) || dom.emptyPara);
       history.recordUndo();
     };
 
@@ -3858,9 +3858,9 @@
      * undo
      */
     this.undo = function () {
-      context.triggerEvent('before.command', $editable.jsp());
+      context.triggerEvent('before.command', $editable.html());
       history.undo();
-      context.triggerEvent('change', $editable.jsp());
+      context.triggerEvent('change', $editable.html());
     };
     context.memo('help.undo', lang.help.undo);
 
@@ -3868,9 +3868,9 @@
      * redo
      */
     this.redo = function () {
-      context.triggerEvent('before.command', $editable.jsp());
+      context.triggerEvent('before.command', $editable.html());
       history.redo();
-      context.triggerEvent('change', $editable.jsp());
+      context.triggerEvent('change', $editable.html());
     };
     context.memo('help.redo', lang.help.redo);
 
@@ -3879,7 +3879,7 @@
      * before command
      */
     var beforeCommand = this.beforeCommand = function () {
-      context.triggerEvent('before.command', $editable.jsp());
+      context.triggerEvent('before.command', $editable.html());
       // keep focus on editable before command execution
       self.focus();
     };
@@ -3892,7 +3892,7 @@
     var afterCommand = this.afterCommand = function (isPreventTrigger) {
       history.recordUndo();
       if (!isPreventTrigger) {
-        context.triggerEvent('change', $editable.jsp());
+        context.triggerEvent('change', $editable.html());
       }
     };
 
@@ -4405,7 +4405,7 @@
      * @return {Boolean}
      */
     this.isEmpty = function () {
-      return dom.isEmpty($editable[0]) || dom.emptyPara === $editable.jsp();
+      return dom.isEmpty($editable[0]) || dom.emptyPara === $editable.html();
     };
   };
 
@@ -4478,7 +4478,7 @@
         context.invoke('editor.focus');
         context.invoke('editor.insertImagesOrCallback', [blob]);
       } else {
-        var pasteContent = $('<div />').jsp(this.$paste.jsp()).jsp();
+        var pasteContent = $('<div />').html(this.$paste.html()).html();
         context.invoke('editor.restoreRange');
         context.invoke('editor.focus');
 
@@ -4648,7 +4648,7 @@
      * activate code view
      */
     this.activate = function () {
-      $codable.val(dom.jsp($editable, options.prettifyHtml));
+      $codable.val(dom.html($editable, options.prettifyHtml));
       $codable.height($editable.height());
 
       context.invoke('toolbar.updateCodeview', true);
@@ -4686,14 +4686,14 @@
       }
 
       var value = dom.value($codable, options.prettifyHtml) || dom.emptyPara;
-      var isChange = $editable.jsp() !== value;
+      var isChange = $editable.html() !== value;
 
-      $editable.jsp(value);
+      $editable.html(value);
       $editable.height(options.height ? $codable.height() : 'auto');
       $editor.removeClass('codeview');
 
       if (isChange) {
-        context.triggerEvent('change', $editable.jsp(), $editable);
+        context.triggerEvent('change', $editable.html(), $editable);
       }
 
       $editable.focus();
@@ -4944,7 +4944,7 @@
     };
 
     this.nodeFromKeyword = function (keyword) {
-      return $('<a />').jsp(keyword).attr('href', keyword)[0];
+      return $('<a />').html(keyword).attr('href', keyword)[0];
     };
 
     this.handleKeydown = function (e) {
@@ -5645,7 +5645,7 @@
         $unhighlighted.css({ height: dim.r + 1 + 'em'});
       }
 
-      $dimensionDisplay.jsp(dim.c + ' x ' + dim.r);
+      $dimensionDisplay.html(dim.c + ' x ' + dim.r);
     };
   };
 
@@ -5888,7 +5888,7 @@
       if (rng.isCollapsed() && rng.isOnAnchor()) {
         var anchor = dom.ancestor(rng.sc, dom.isAnchor);
         var href = $(anchor).attr('href');
-        this.$popover.find('a').attr('href', href).jsp(href);
+        this.$popover.find('a').attr('href', href).html(href);
 
         var pos = dom.posFromPlaceholder(anchor);
         this.$popover.css({
@@ -6118,7 +6118,7 @@
       var dmRegExp = /.+dailymotion.com\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/;
       var dmMatch = url.match(dmRegExp);
 
-      var youkuRegExp = /\/\/v\.youku\.com\/v_show\/id_(\w+)=*\.jsp/;
+      var youkuRegExp = /\/\/v\.youku\.com\/v_show\/id_(\w+)=*\.html/;
       var youkuMatch = url.match(youkuRegExp);
 
       var mp4RegExp = /^.+.(mp4|m4v)$/;
@@ -6264,15 +6264,15 @@
           'width': 180,
           'max-width': 200,
           'margin-right': 10
-        }).jsp(keyString);
-        var $description = $('<span />').jsp(str);
+        }).html(keyString);
+        var $description = $('<span />').html(str);
 
-        $row.jsp($keyString).append($description);
+        $row.html($keyString).append($description);
 
         $list.append($row);
       });
 
-      return $list.jsp();
+      return $list.html();
     };
 
     this.initialize = function () {
@@ -6549,7 +6549,7 @@
       this.searchKeyword(idx, keyword, function (items) {
         items = items || [];
         if (items.length) {
-          $group.jsp(self.createItemTemplates(idx, items));
+          $group.html(self.createItemTemplates(idx, items));
           self.show();
         }
       });

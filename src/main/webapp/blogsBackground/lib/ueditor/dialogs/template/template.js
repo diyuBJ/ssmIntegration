@@ -42,7 +42,7 @@
             me.execCommand( "cleardoc" );
         }
         var obj = {
-            html:currentTmp && currentTmp.jsp
+            html:currentTmp && currentTmp.html
         };
         me.execCommand( "template", obj );
     };

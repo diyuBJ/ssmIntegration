@@ -69,7 +69,7 @@
                     list = uploadFile.getInsertList();
                     var count = uploadFile.getQueueCount();
                     if (count) {
-                        $('.info', '#queueList').jsp('<span style="color:red;">' + '还有2个未上传文件'.replace(/[\d]/, count) + '</span>');
+                        $('.info', '#queueList').html('<span style="color:red;">' + '还有2个未上传文件'.replace(/[\d]/, count) + '</span>');
                         return false;
                     }
                     break;
@@ -148,10 +148,10 @@
                 acceptExtensions = (editor.getOpt('fileAllowFiles') || []).join('').replace(/\./g, ',').replace(/^[,]/, '');;
 
             if (!WebUploader.Uploader.support()) {
-                $('#filePickerReady').after($('<div>').jsp(lang.errorNotSupport)).hide();
+                $('#filePickerReady').after($('<div>').html(lang.errorNotSupport)).hide();
                 return;
             } else if (!editor.getOpt('fileActionName')) {
-                $('#filePickerReady').after($('<div>').jsp(lang.errorLoadConfig)).hide();
+                $('#filePickerReady').after($('<div>').html(lang.errorLoadConfig)).hide();
                 return;
             }
 
@@ -435,7 +435,7 @@
                     }
                 }
 
-                $info.jsp(text);
+                $info.html(text);
             }
 
             uploader.on('fileQueued', function (file) {

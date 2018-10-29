@@ -465,8 +465,8 @@
          case "html":
          case "air:html":
          case "flash:html":
-          newClipData.jsp = clipData[dataFormat];
-          formatMap.jsp = dataFormat;
+          newClipData.html = clipData[dataFormat];
+          formatMap.html = dataFormat;
           break;
 
          case "application/rtf":

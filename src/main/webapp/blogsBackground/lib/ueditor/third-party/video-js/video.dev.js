@@ -2927,7 +2927,7 @@ vjs.Player.prototype.loadTech = function(techName, source){
   // if this is the first time loading, HTML5 tag will exist but won't be initialized
   // so we need to remove it if we're not loading HTML5
   } else if (techName !== 'Html5' && this.tag) {
-    vjs.jsp5.disposeMediaElement(this.tag);
+    vjs.Html5.disposeMediaElement(this.tag);
     this.tag = null;
   }
 
@@ -3365,7 +3365,7 @@ vjs.Player.prototype.remainingTime = function(){
   return this.duration() - this.currentTime();
 };
 
-// http://dev.w3.org/html5/spec/video.jsp#dom-media-buffered
+// http://dev.w3.org/html5/spec/video.html#dom-media-buffered
 // Buffered returns a timerange object.
 // Kind of like an array of portions of the video that have been downloaded.
 // So far no browsers return more than one range (portion)
@@ -3709,13 +3709,13 @@ vjs.Player.prototype.src = function(source){
 };
 
 // Begin loading the src data
-// http://dev.w3.org/html5/spec/video.jsp#dom-media-load
+// http://dev.w3.org/html5/spec/video.html#dom-media-load
 vjs.Player.prototype.load = function(){
   this.techCall('load');
   return this;
 };
 
-// http://dev.w3.org/html5/spec/video.jsp#dom-media-currentsrc
+// http://dev.w3.org/html5/spec/video.html#dom-media-currentsrc
 vjs.Player.prototype.currentSrc = function(){
   return this.techGet('currentSrc') || this.cache_.src || '';
 };
@@ -4021,9 +4021,9 @@ vjs.Player.prototype.listenForUserActivity = function(){
   requestFS = {};
 
   // Current W3C Spec
-  // http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.jsp#api
+  // http://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html#api
   // Mozilla Draft: https://wiki.mozilla.org/Gecko:FullScreenAPI#fullscreenchange_event
-  // New: https://dvcs.w3.org/hg/fullscreen/raw-file/529a67b8d9f3/Overview.jsp
+  // New: https://dvcs.w3.org/hg/fullscreen/raw-file/529a67b8d9f3/Overview.html
   if (div.cancelFullscreen !== undefined) {
     requestFS.requestFn = 'requestFullscreen';
     requestFS.cancelFn = 'exitFullscreen';
@@ -5073,11 +5073,11 @@ for (var i = vjs.media.ApiMethods.length - 1; i >= 0; i--) {
  * @param {Function=} ready
  * @constructor
  */
-vjs.jsp5 = vjs.MediaTechController.extend({
+vjs.Html5 = vjs.MediaTechController.extend({
   /** @constructor */
   init: function(player, options, ready){
     // volume cannot be changed from 1 on iOS
-    this.features['volumeControl'] = vjs.jsp5.canControlVolume();
+    this.features['volumeControl'] = vjs.Html5.canControlVolume();
 
     // In iOS, if you move a video element in the DOM, it breaks video playback.
     this.features['movingMediaElementInDOM'] = !vjs.IS_IOS;
@@ -5123,11 +5123,11 @@ vjs.jsp5 = vjs.MediaTechController.extend({
   }
 });
 
-vjs.jsp5.prototype.dispose = function(){
+vjs.Html5.prototype.dispose = function(){
   vjs.MediaTechController.prototype.dispose.call(this);
 };
 
-vjs.jsp5.prototype.createEl = function(){
+vjs.Html5.prototype.createEl = function(){
   var player = this.player_,
       // If possible, reuse original tag for HTML5 playback technology element
       el = player.tag,
@@ -5142,7 +5142,7 @@ vjs.jsp5.prototype.createEl = function(){
     // If the original tag is still there, clone and remove it.
     if (el) {
       clone = el.cloneNode(false);
-      vjs.jsp5.disposeMediaElement(el);
+      vjs.Html5.disposeMediaElement(el);
       el = clone;
       player.tag = null;
     } else {
@@ -5172,21 +5172,21 @@ vjs.jsp5.prototype.createEl = function(){
 
 // Make video events trigger player events
 // May seem verbose here, but makes other APIs possible.
-vjs.jsp5.prototype.setupTriggers = function(){
-  for (var i = vjs.jsp5.Events.length - 1; i >= 0; i--) {
-    vjs.on(this.el_, vjs.jsp5.Events[i], vjs.bind(this.player_, this.eventHandler));
+vjs.Html5.prototype.setupTriggers = function(){
+  for (var i = vjs.Html5.Events.length - 1; i >= 0; i--) {
+    vjs.on(this.el_, vjs.Html5.Events[i], vjs.bind(this.player_, this.eventHandler));
   }
 };
 // Triggers removed using this.off when disposed
 
-vjs.jsp5.prototype.eventHandler = function(e){
+vjs.Html5.prototype.eventHandler = function(e){
   this.trigger(e);
 
   // No need for media events to bubble up.
   e.stopPropagation();
 };
 
-vjs.jsp5.prototype.useNativeControls = function(){
+vjs.Html5.prototype.useNativeControls = function(){
   var tech, player, controlsOn, controlsOff, cleanUp;
 
   tech = this;
@@ -5218,12 +5218,12 @@ vjs.jsp5.prototype.useNativeControls = function(){
 };
 
 
-vjs.jsp5.prototype.play = function(){ this.el_.play(); };
-vjs.jsp5.prototype.pause = function(){ this.el_.pause(); };
-vjs.jsp5.prototype.paused = function(){ return this.el_.paused; };
+vjs.Html5.prototype.play = function(){ this.el_.play(); };
+vjs.Html5.prototype.pause = function(){ this.el_.pause(); };
+vjs.Html5.prototype.paused = function(){ return this.el_.paused; };
 
-vjs.jsp5.prototype.currentTime = function(){ return this.el_.currentTime; };
-vjs.jsp5.prototype.setCurrentTime = function(seconds){
+vjs.Html5.prototype.currentTime = function(){ return this.el_.currentTime; };
+vjs.Html5.prototype.setCurrentTime = function(seconds){
   try {
     this.el_.currentTime = seconds;
   } catch(e) {
@@ -5232,18 +5232,18 @@ vjs.jsp5.prototype.setCurrentTime = function(seconds){
   }
 };
 
-vjs.jsp5.prototype.duration = function(){ return this.el_.duration || 0; };
-vjs.jsp5.prototype.buffered = function(){ return this.el_.buffered; };
+vjs.Html5.prototype.duration = function(){ return this.el_.duration || 0; };
+vjs.Html5.prototype.buffered = function(){ return this.el_.buffered; };
 
-vjs.jsp5.prototype.volume = function(){ return this.el_.volume; };
-vjs.jsp5.prototype.setVolume = function(percentAsDecimal){ this.el_.volume = percentAsDecimal; };
-vjs.jsp5.prototype.muted = function(){ return this.el_.muted; };
-vjs.jsp5.prototype.setMuted = function(muted){ this.el_.muted = muted; };
+vjs.Html5.prototype.volume = function(){ return this.el_.volume; };
+vjs.Html5.prototype.setVolume = function(percentAsDecimal){ this.el_.volume = percentAsDecimal; };
+vjs.Html5.prototype.muted = function(){ return this.el_.muted; };
+vjs.Html5.prototype.setMuted = function(muted){ this.el_.muted = muted; };
 
-vjs.jsp5.prototype.width = function(){ return this.el_.offsetWidth; };
-vjs.jsp5.prototype.height = function(){ return this.el_.offsetHeight; };
+vjs.Html5.prototype.width = function(){ return this.el_.offsetWidth; };
+vjs.Html5.prototype.height = function(){ return this.el_.offsetHeight; };
 
-vjs.jsp5.prototype.supportsFullScreen = function(){
+vjs.Html5.prototype.supportsFullScreen = function(){
   if (typeof this.el_.webkitEnterFullScreen == 'function') {
 
     // Seems to be broken in Chromium/Chrome && Safari in Leopard
@@ -5254,7 +5254,7 @@ vjs.jsp5.prototype.supportsFullScreen = function(){
   return false;
 };
 
-vjs.jsp5.prototype.enterFullScreen = function(){
+vjs.Html5.prototype.enterFullScreen = function(){
   var video = this.el_;
   if (video.paused && video.networkState <= video.HAVE_METADATA) {
     // attempt to prime the video element for programmatic access
@@ -5271,37 +5271,37 @@ vjs.jsp5.prototype.enterFullScreen = function(){
     video.webkitEnterFullScreen();
   }
 };
-vjs.jsp5.prototype.exitFullScreen = function(){
+vjs.Html5.prototype.exitFullScreen = function(){
   this.el_.webkitExitFullScreen();
 };
-vjs.jsp5.prototype.src = function(src){ this.el_.src = src; };
-vjs.jsp5.prototype.load = function(){ this.el_.load(); };
-vjs.jsp5.prototype.currentSrc = function(){ return this.el_.currentSrc; };
+vjs.Html5.prototype.src = function(src){ this.el_.src = src; };
+vjs.Html5.prototype.load = function(){ this.el_.load(); };
+vjs.Html5.prototype.currentSrc = function(){ return this.el_.currentSrc; };
 
-vjs.jsp5.prototype.preload = function(){ return this.el_.preload; };
-vjs.jsp5.prototype.setPreload = function(val){ this.el_.preload = val; };
+vjs.Html5.prototype.preload = function(){ return this.el_.preload; };
+vjs.Html5.prototype.setPreload = function(val){ this.el_.preload = val; };
 
-vjs.jsp5.prototype.autoplay = function(){ return this.el_.autoplay; };
-vjs.jsp5.prototype.setAutoplay = function(val){ this.el_.autoplay = val; };
+vjs.Html5.prototype.autoplay = function(){ return this.el_.autoplay; };
+vjs.Html5.prototype.setAutoplay = function(val){ this.el_.autoplay = val; };
 
-vjs.jsp5.prototype.controls = function(){ return this.el_.controls; }
-vjs.jsp5.prototype.setControls = function(val){ this.el_.controls = !!val; }
+vjs.Html5.prototype.controls = function(){ return this.el_.controls; }
+vjs.Html5.prototype.setControls = function(val){ this.el_.controls = !!val; }
 
-vjs.jsp5.prototype.loop = function(){ return this.el_.loop; };
-vjs.jsp5.prototype.setLoop = function(val){ this.el_.loop = val; };
+vjs.Html5.prototype.loop = function(){ return this.el_.loop; };
+vjs.Html5.prototype.setLoop = function(val){ this.el_.loop = val; };
 
-vjs.jsp5.prototype.error = function(){ return this.el_.error; };
-vjs.jsp5.prototype.seeking = function(){ return this.el_.seeking; };
-vjs.jsp5.prototype.ended = function(){ return this.el_.ended; };
-vjs.jsp5.prototype.defaultMuted = function(){ return this.el_.defaultMuted; };
+vjs.Html5.prototype.error = function(){ return this.el_.error; };
+vjs.Html5.prototype.seeking = function(){ return this.el_.seeking; };
+vjs.Html5.prototype.ended = function(){ return this.el_.ended; };
+vjs.Html5.prototype.defaultMuted = function(){ return this.el_.defaultMuted; };
 
 /* HTML5 Support Testing ---------------------------------------------------- */
 
-vjs.jsp5.isSupported = function(){
+vjs.Html5.isSupported = function(){
   return !!vjs.TEST_VID.canPlayType;
 };
 
-vjs.jsp5.canPlaySource = function(srcObj){
+vjs.Html5.canPlaySource = function(srcObj){
   // IE9 on Windows 7 without MediaPlayer throws an error here
   // https://github.com/videojs/video.js/issues/519
   try {
@@ -5314,16 +5314,16 @@ vjs.jsp5.canPlaySource = function(srcObj){
   // Check Media Type
 };
 
-vjs.jsp5.canControlVolume = function(){
+vjs.Html5.canControlVolume = function(){
   var volume =  vjs.TEST_VID.volume;
   vjs.TEST_VID.volume = (volume / 2) + 0.1;
   return volume !== vjs.TEST_VID.volume;
 };
 
 // List of all HTML5 events (various uses).
-vjs.jsp5.Events = 'loadstart,suspend,abort,error,emptied,stalled,loadedmetadata,loadeddata,canplay,canplaythrough,playing,waiting,seeking,seeked,ended,durationchange,timeupdate,progress,play,pause,ratechange,volumechange'.split(',');
+vjs.Html5.Events = 'loadstart,suspend,abort,error,emptied,stalled,loadedmetadata,loadeddata,canplay,canplaythrough,playing,waiting,seeking,seeked,ended,durationchange,timeupdate,progress,play,pause,ratechange,volumechange'.split(',');
 
-vjs.jsp5.disposeMediaElement = function(el){
+vjs.Html5.disposeMediaElement = function(el){
   if (!el) { return; }
 
   el['player'] = null;
@@ -5949,7 +5949,7 @@ vjs.Player.prototype.textTracks_;
 
 /**
  * Get an array of associated text tracks. captions, subtitles, chapters, descriptions
- * http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.jsp#dom-media-texttracks
+ * http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.html#dom-media-texttracks
  * @return {Array}           Array of track objects
  * @private
  */
@@ -5961,7 +5961,7 @@ vjs.Player.prototype.textTracks = function(){
 /**
  * Add a text track
  * In addition to the W3C settings we allow adding additional info through options.
- * http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.jsp#dom-media-addtexttrack
+ * http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.html#dom-media-addtexttrack
  * @param {String}  kind        Captions, subtitles, chapters, descriptions, or metadata
  * @param {String=} label       Optional label
  * @param {String=} language    Optional language

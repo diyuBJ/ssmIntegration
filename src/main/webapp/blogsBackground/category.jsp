@@ -1,18 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Geni
-  Date: 2018/10/29
-  Time: 16:10
+  User: Administrator
+  Date: 2018/10/26
+  Time: 14:50
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!doctype html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>栏目 - 异清轩博客管理系统</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -116,25 +111,20 @@
                             <label for="category-alias">栏目别名</label>
                             <input type="text" id="category-alias" name="alias" class="form-control" placeholder="在此处输入栏目别名" required autocomplete="off">
                             <span class="prompt-text">“别名”是在URL中使用的别称，它可以令URL更美观。通常使用小写，只能包含字母，数字和连字符（-）。</span> </div>
-                        <div class="form-group">
-                            <label for="category-fname">父节点</label>
-                            <select id="category-fname" class="form-control" name="fid">
-                                <option value="0" selected>无</option>
-                                <option value="1">前端技术</option>
-                                <option value="2">后端程序</option>
-                                <option value="3">管理系统</option>
-                                <option value="4">授人以渔</option>
-                                <option value="5">程序人生</option>
-                            </select>
-                            <span class="prompt-text">栏目是有层级关系的，您可以有一个“音乐”分类目录，在这个目录下可以有叫做“流行”和“古典”的子目录。</span> </div>
-                        <div class="form-group">
-                            <label for="category-keywords">关键字</label>
-                            <input type="text" id="category-keywords" name="keywords" class="form-control" placeholder="在此处输入栏目关键字" autocomplete="off">
-                            <span class="prompt-text">关键字会出现在网页的keywords属性中。</span> </div>
-                        <div class="form-group">
-                            <label for="category-describe">描述</label>
-                            <textarea class="form-control" id="category-describe" name="describe" rows="4" autocomplete="off"></textarea>
-                            <span class="prompt-text">描述会出现在网页的description属性中。</span> </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label for="category-fname">父节点</label>--%>
+                            <%--<select id="category-fname" class="form-control" name="fid">--%>
+                                <%--<option value="0" selected>无</option>--%>
+                                <%--<option value="1">前端技术</option>--%>
+                                <%--<option value="2">后端程序</option>--%>
+                                <%--<option value="3">管理系统</option>--%>
+                                <%--<option value="4">授人以渔</option>--%>
+                                <%--<option value="5">程序人生</option>--%>
+                            <%--</select>--%>
+                            <%--<span class="prompt-text">栏目是有层级关系的，您可以有一个“音乐”分类目录，在这个目录下可以有叫做“流行”和“古典”的子目录。</span> </div>--%>
+                        <div class="add-article-box-content">
+                            <p><label>状态：</label><input type="radio" name="visibility" value="0" checked/>公开 <input type="radio" name="visibility" value="1" />隐藏</p>
+                        </div>
                         <button class="btn btn-primary" type="submit" name="submit">添加新栏目</button>
                     </form>
                 </div>
@@ -362,3 +352,4 @@
 </script>
 </body>
 </html>
+
