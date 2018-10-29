@@ -1,9 +1,9 @@
-package xyz.askway.service.serviceImpl;
+package xyz.askway.wlm.service.serviceImpl;
 
 import org.springframework.stereotype.Service;
-import xyz.askway.dao.CURD;
-import xyz.askway.pojo.StudentBean;
-import xyz.askway.service.CURDService;
+import xyz.askway.wlm.dao.CURD;
+import xyz.askway.wlm.pojo.StudentBean;
+import xyz.askway.wlm.service.CURDService;
 
 import javax.annotation.Resource;
 import java.util.List;

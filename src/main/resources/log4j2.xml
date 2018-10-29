@@ -10,7 +10,7 @@
 
         <!-- fileName：输出路径  filePattern：命名规则 -->
         <RollingFile name="RollingFileInfo" fileName="\logs\log.log"
-                     filePattern="\logs\$${date:yyyy-MM}\log-%d{MM-dd-yyyy}-%i.log.gz">
+                     filePattern="\logs\${date:yyyy-MM}\log-%d{MM-dd-yyyy}-%i.log.gz">
             <Filters>
                 <ThresholdFilter level="all" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>

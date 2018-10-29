@@ -2,7 +2,6 @@ package xyz.askway.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import xyz.askway.controller.StudentController;
 
 
 /**
@@ -13,8 +12,7 @@ import xyz.askway.controller.StudentController;
  */
 public class Log4j2Controller {
 
-    private static Logger logger = LogManager.getLogger();
-
+    private static Logger logger = LogManager.getLogger("RollingFileInfo");
 
     public Log4j2Controller() {
     }

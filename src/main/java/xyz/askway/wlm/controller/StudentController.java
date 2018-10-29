@@ -1,4 +1,4 @@
-package xyz.askway.controller;
+package xyz.askway.wlm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -6,10 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.servlet.ModelAndView;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import xyz.askway.pojo.StudentBean;
-import xyz.askway.service.CURDService;
+import xyz.askway.wlm.pojo.StudentBean;
+import xyz.askway.wlm.service.CURDService;
 import xyz.askway.util.Log4j2Controller;
 
 import javax.annotation.Resource;

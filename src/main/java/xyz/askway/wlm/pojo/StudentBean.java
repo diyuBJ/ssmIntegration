@@ -1,4 +1,4 @@
-package xyz.askway.pojo;
+package xyz.askway.wlm.pojo;
 
 import java.io.Serializable;
 

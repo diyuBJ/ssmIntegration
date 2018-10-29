@@ -15,6 +15,7 @@
     <param-value>classpath:spring-mybatis.xml</param-value>
   </context-param>
 
+
   <!-- Spring监听器 -->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -23,6 +24,19 @@
   <listener>
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
   </listener>
+
+  <!--log4j2-->
+  <!--<listener>-->
+    <!--<listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>-->
+  <!--</listener>-->
+  <!--<context-param>-->
+    <!--<param-name>isLog4jAutoInitializationDisabled</param-name>-->
+    <!--<param-value>true</param-value>-->
+  <!--</context-param>-->
+  <context-param>
+    <param-name>log4jContextName</param-name>
+    <param-value>ktjnAPI</param-value>
+  </context-param>
 
   <!-- 编码过滤器 -->
   <filter>

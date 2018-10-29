@@ -1,7 +1,8 @@
-package xyz.askway.dao;
+package xyz.askway.wlm.service;
 
 import org.apache.ibatis.annotations.Param;
-import xyz.askway.pojo.StudentBean;
+
+import xyz.askway.wlm.pojo.StudentBean;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * function:
  * 2018/10/22 10:06
  */
-public interface CURD {
+public interface CURDService {
     /**
      * 2018/10/21 9:12
      * #author:wlm
@@ -26,7 +27,7 @@ public interface CURD {
      * #function:查询单个学生
      * #analysis:
      */
-    StudentBean queryOne(@Param("arg")String arg);
+    StudentBean queryOne(@Param("arg") String arg);
 
     /**
      * 2018/10/21 10:18
@@ -34,7 +35,7 @@ public interface CURD {
      * #function:添加一个学生
      * #analysis:
      */
-    Integer addOne(@Param("stu")StudentBean stu);
+    Integer addOne(@Param("stu") StudentBean stu);
 
     /**
      * 2018/10/21 10:19
@@ -42,7 +43,7 @@ public interface CURD {
      * #function:更新一个学生信息
      * #analysis:
      */
-    Integer update(@Param("stu")StudentBean stu);
+    Integer update(@Param("stu") StudentBean stu);
 
     /**
      * 2018/10/21 10:20
@@ -50,5 +51,5 @@ public interface CURD {
      * #function:删除一个学生
      * #analysis:
      */
-    Integer delete(@Param("name")String name);
+    Integer delete(@Param("name") String name);
 }
