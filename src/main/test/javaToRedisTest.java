@@ -11,7 +11,7 @@ public class javaToRedisTest {
     @Test
     public void redisConnectionTest(){
         Jedis jedis= new Jedis("172.20.10.2",6379);
-        jedis.set("test","测试");
+        jedis.set("test","测试9999");
         System.out.println(jedis.get("test"));
 
     }
