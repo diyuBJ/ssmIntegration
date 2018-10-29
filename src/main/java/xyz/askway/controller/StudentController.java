@@ -32,7 +32,6 @@ public class StudentController {
     @Autowired
     private RedisTemplate redisTemplate;
 
-
     @RequestMapping("add")
     public ModelAndView addStudent(ModelAndView mav,StudentBean studentBean){
         mav.setViewName("successOrFailure.jsp");
