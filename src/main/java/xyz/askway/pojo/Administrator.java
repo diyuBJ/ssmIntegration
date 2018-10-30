@@ -65,7 +65,7 @@ public class Administrator implements Serializable{
 		return uName;
 	}
 	/**
-	 * @Title:setUUserName 
+	 * @Title:setUserName
 	 * @Description: TODO(设置UUserName	账户名)
 	 * @param uUserName
 	 */ 
@@ -73,7 +73,7 @@ public class Administrator implements Serializable{
 		this.uUserName=uUserName;
 	}
 	/**
-	 * @Title:setUUserName 
+	 * @Title:setUserName
 	 * @Description: TODO(得到UUserName	账户名)
 	 * @return String
 	 */ 
