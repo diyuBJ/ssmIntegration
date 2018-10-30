@@ -10,7 +10,7 @@
 <form action="/Article/checkAll" method="post" >
     <h1 class="page-header">操作</h1>
     <ol class="breadcrumb">
-        <li><a href="add-article.jsp">增加文章</a></li>
+        <li><a href="#" onclick="loads('add-article.jsp')">增加文章</a></li>
     </ol>
     <h1 class="page-header">管理 <span class="badge">7</span></h1>
     <div class="table-responsive">

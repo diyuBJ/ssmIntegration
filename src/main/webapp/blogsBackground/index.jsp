@@ -17,7 +17,8 @@
     <![endif]-->
     <!--[if lt IE 9]>
     <!--<script>window.location.href='upgrade-browser.jsp';</script>-->
-    <![endif]-->
+    <!--[endif]-->
+
 </head>
 
 <body class="user-select">
@@ -332,11 +333,14 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/admin-scripts.js"></script>
 <script >
-    //导入页面
+    //导入页 面
     function loads(url) {
         $("#main").html("");
         $("#main").load(url);
     }
+
+
 </script>
+
 </body>
 </html>
