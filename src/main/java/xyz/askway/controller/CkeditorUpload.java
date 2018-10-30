@@ -1,6 +1,7 @@
 package xyz.askway.controller;
 
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import xyz.askway.dao.AdministratorDao;
+import xyz.askway.pojo.Administrator;
 import xyz.askway.util.ImageUploadUtil;
 
 /** 
@@ -18,6 +21,8 @@ import xyz.askway.util.ImageUploadUtil;
  */
 @Controller
 public class CkeditorUpload {
+//    @Resource
+//    private AdministratorDao administratorDao;
     /**
      * ckeditor图片上传
      *
@@ -27,6 +32,11 @@ public class CkeditorUpload {
      */
     @RequestMapping(value = "/uploadImg.do", method = RequestMethod.POST)
     public void imageUpload(HttpServletRequest request, HttpServletResponse response) {
+//        Administrator administrator = new Administrator();
+//        administrator.setUName("张三");
+//        Administrator administrator1 = administratorDao.getAdministrator(administrator);
+//        System.out.println(administrator1);
+
         String DirectoryName = "upload/";
         try {
             ImageUploadUtil.ckeditor(request, response, DirectoryName);
