@@ -17,42 +17,30 @@ public class Article implements Serializable{
 	private String aTime; 	//时间
 	private Integer aReadingQuantity; 	//阅读量
 	private Integer aCommentnum; 	//评论数
-	private Integer pId; 	//栏目id 外键
-	private Integer lId; 	//标签id 外键
+	private Programa programa;//栏目id 外键
+	private Label label;//标签id 外键
+	private Administrator administrator;//管理员id 外键
 	private Integer aStatusBar; 	//状态 0不公开 1公开
-	private String uId; 	//管理员id 外键
 	/**
 	 * @Description: TODO(无参构造方法) 
 	 */ 
 	public Article(){
 	}
-	/**
-	 * @Description: TODO(有参构造方法) 
-	 * @param aId	文章id
-	 * @param aTitle	标题
-	 * @param aContent	内容
-	 * @param aTitleImg	标题图片
-	 * @param aTime	时间
-	 * @param aReadingQuantity	阅读量
-	 * @param aCommentnum	评论数
-	 * @param pId	栏目id 外键
-	 * @param lId	标签id 外键
-	 * @param aStatusBar	状态 0不公开 1公开
-	 * @param uId	管理员id 外键
-	 */ 
-	public Article(String aId,String aTitle,String aContent,String aTitleImg,String aTime,Integer aReadingQuantity,Integer aCommentnum,Integer pId,Integer lId,Integer aStatusBar,String uId){
-		this.aId=aId;
-		this.aTitle=aTitle;
-		this.aContent=aContent;
-		this.aTitleImg=aTitleImg;
-		this.aTime=aTime;
-		this.aReadingQuantity=aReadingQuantity;
-		this.aCommentnum=aCommentnum;
-		this.pId=pId;
-		this.lId=lId;
-		this.aStatusBar=aStatusBar;
-		this.uId=uId;
+
+	public Article(String aId, String aTitle, String aContent, String aTitleImg, String aTime, Integer aReadingQuantity, Integer aCommentnum, Programa programa, Label label, Administrator administrator, Integer aStatusBar) {
+		this.aId = aId;
+		this.aTitle = aTitle;
+		this.aContent = aContent;
+		this.aTitleImg = aTitleImg;
+		this.aTime = aTime;
+		this.aReadingQuantity = aReadingQuantity;
+		this.aCommentnum = aCommentnum;
+		this.programa = programa;
+		this.label = label;
+		this.administrator = administrator;
+		this.aStatusBar = aStatusBar;
 	}
+
 	/**
 	 * @Title:setAId 
 	 * @Description: TODO(设置AId	文章id)
@@ -165,38 +153,7 @@ public class Article implements Serializable{
 	public Integer getACommentnum(){
 		return aCommentnum;
 	}
-	/**
-	 * @Title:setPId 
-	 * @Description: TODO(设置PId	栏目id 外键)
-	 * @param pId
-	 */ 
-	public void setPId(Integer pId){
-		this.pId=pId;
-	}
-	/**
-	 * @Title:setPId 
-	 * @Description: TODO(得到PId	栏目id 外键)
-	 * @return Integer
-	 */ 
-	public Integer getPId(){
-		return pId;
-	}
-	/**
-	 * @Title:setLId 
-	 * @Description: TODO(设置LId	标签id 外键)
-	 * @param lId
-	 */ 
-	public void setLId(Integer lId){
-		this.lId=lId;
-	}
-	/**
-	 * @Title:setLId 
-	 * @Description: TODO(得到LId	标签id 外键)
-	 * @return Integer
-	 */ 
-	public Integer getLId(){
-		return lId;
-	}
+
 	/**
 	 * @Title:setAStatusBar 
 	 * @Description: TODO(设置AStatusBar	状态 0不公开 1公开)
@@ -213,31 +170,43 @@ public class Article implements Serializable{
 	public Integer getAStatusBar(){
 		return aStatusBar;
 	}
-	/**
-	 * @Title:setUId 
-	 * @Description: TODO(设置UId	管理员id 外键)
-	 * @param uId
-	 */ 
-	public void setUId(String uId){
-		this.uId=uId;
+
+	public Programa getPrograma() {
+		return programa;
 	}
-	/**
-	 * @Title:setUId 
-	 * @Description: TODO(得到UId	管理员id 外键)
-	 * @return String
-	 */ 
-	public String getUId(){
-		return uId;
+
+	public void setPrograma(Programa programa) {
+		this.programa = programa;
 	}
-	/**
-	 * @Title:toString 
-	 * @Description: TODO(toString)
-	 */ 
-	public String toString() { 
-		return "Article[aId=" + aId + ",aTitle=" + aTitle + ",aContent=" + aContent + ","+
-		"aTitleImg=" + aTitleImg + ",aTime=" + aTime + ",aReadingQuantity=" + aReadingQuantity + ","+
-		"aCommentnum=" + aCommentnum + ",pId=" + pId + ",lId=" + lId + ","+
-		"aStatusBar=" + aStatusBar + ",uId=" + uId + "]";
+
+	public Label getLabel() {
+		return label;
+	}
+
+	public void setLabel(Label label) {
+		this.label = label;
+	}
+
+	public Administrator getAdministrator() {
+		return administrator;
+	}
+
+	public void setAdministrator(Administrator administrator) {
+		this.administrator = administrator;
+	}
+
+	@Override
+	public String toString() {
+		return "Article{" +
+				"aId='" + aId + '\'' +
+				", aTitle='" + aTitle + '\'' +
+				", aContent='" + aContent + '\'' +
+				", aTitleImg='" + aTitleImg + '\'' +
+				", aTime='" + aTime + '\'' +
+				", aReadingQuantity=" + aReadingQuantity +
+				", aCommentnum=" + aCommentnum +
+				", aStatusBar=" + aStatusBar +
+				'}';
 	}
 }
 

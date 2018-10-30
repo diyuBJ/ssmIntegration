@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-5" id="category1">
                     <h1 class="page-header">添加</h1>
                     <form action="/Category/add" method="post" autocomplete="off">
                         <div class="form-group">
@@ -55,14 +55,14 @@
                                 <td>前端技术</td>
                                 <td>web</td>
                                 <td>125</td>
-                                <td><a href="#" onclick="loads('update-category.jsp')">修改</a> <a rel="1">删除</a></td>
+                                <td><a href="#" onclick="loadscategory('update-category.jsp')">修改</a> <a rel="1">删除</a></td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>后端程序</td>
                                 <td>program</td>
                                 <td>185</td>
-                                <td><a href="#" onclick="loads('update-category.jsp')">修改</a> <a rel="2">删除</a></td>
+                                <td><a href="#" onclick="loadscategory('update-category.jsp')">修改</a> <a rel="2">删除</a></td>
                             </tr>
                             <tr>
                                 <td>3</td>
@@ -119,6 +119,12 @@
             };
         });
     });
+
+    //导入页 面
+    function loadscategory(url) {
+        $("#category1").html("");
+        $("#category1").load(url);
+    }
 </script>
 
 

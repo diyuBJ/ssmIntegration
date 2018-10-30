@@ -78,10 +78,10 @@ public class Programa implements Serializable{
 		return pAlias;
 	}
 	/**
-	 * @Title:toString 
+	 * @Title:toString
 	 * @Description: TODO(toString)
-	 */ 
-	public String toString() { 
+	 */
+	public String toString() {
 		return "Programa[pId=" + pId + ",pName=" + pName + ",pAlias=" + pAlias + "]";
 	}
 }

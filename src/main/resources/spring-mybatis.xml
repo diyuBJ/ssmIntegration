@@ -9,7 +9,14 @@
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-
+    <!--图片上传-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="2097152" />
+        <!-- resolveLazily属性启用是为了推迟文件解析，以便在Action 中捕获文件大小异常 -->
+        <property name="resolveLazily" value="true" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
     <!-- 自动扫描注解 -->
     <context:component-scan base-package="xyz.askway" />
     <!-- 引入redis配置文件 -->
@@ -53,18 +60,10 @@
     </bean>
 
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <!--图片上传-->
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="2097152" />
-        <!-- resolveLazily属性启用是为了推迟文件解析，以便在Action 中捕获文件大小异常 -->
-        <property name="resolveLazily" value="true" />
-        <property name="defaultEncoding" value="UTF-8" />
-    </bean>
+
 
 </beans>

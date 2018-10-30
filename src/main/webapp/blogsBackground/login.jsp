@@ -49,14 +49,21 @@
             $(this).text('密码不能为空');
         }else{
             $(this).text('请稍后...');
+            var a=0;
             $.ajax({
                 url:"/login.do",
                 data:{"uUserName":$('#userName').val(),"uPassword":$('#userPwd').val()},
                 type:"POST",
+                resultType:"JSON",
+                dataType:"JSON",
                 success:function (data) {
                     alert(data)
+                    if(data!="null"){
+                        a=1;
+                    }
                 }
             })
+alert(a)
             return false;
         }
     });
