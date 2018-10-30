@@ -2,26 +2,18 @@
 
 <!--
   This is the JRebel configuration file. It maps the running application to your IDE workspace, enabling JRebel reloading for this project.
-  Refer to https://manuals.zeroturnaround.com/jrebel/standalone/config.html for more information.
+  Refer to https://manuals.zeroturnaround.com/jrebel/standalone/config.jsp for more information.
 -->
 <application generated-by="intellij" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com" xsi:schemaLocation="http://www.zeroturnaround.com http://update.zeroturnaround.com/jrebel/rebel-2_1.xsd">
 
 	<classpath>
-<<<<<<< HEAD
 		<dir name="E:/_workSpace/intellijIdeaCode/javaEE/SSM/ssmIntegration/target/classes">
-=======
-		<dir name="D:/IdeaProjects/ssmIntegration/target/classes">
->>>>>>> origin/master
 		</dir>
 	</classpath>
 
 	<web>
 		<link target="/">
-<<<<<<< HEAD
 			<dir name="E:/_workSpace/intellijIdeaCode/javaEE/SSM/ssmIntegration/src/main/webapp">
-=======
-			<dir name="D:/IdeaProjects/ssmIntegration/src/main/webapp">
->>>>>>> origin/master
 			</dir>
 		</link>
 	</web>
