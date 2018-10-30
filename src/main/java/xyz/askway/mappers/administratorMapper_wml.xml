@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 管理员mapper -->
+<mapper namespace="xyz.askway.dao.AdministratorDAO_wml">
+
+    <resultMap id="administrator" type="xyz.askway.pojo.Administrator">
+        <id property="uId" column="u_id"/>
+        <result property="uName" column="u_name"/>
+        <result property="uUserName" column="u_user_name"/>
+        <result property="uPassword" column="u_password"/>
+    </resultMap>
+
+    <!--查询管理员，所有或者按条件-->
+    <select id="query" resultMap="administrator">
+        select * from administrator where 1=1
+        <if test="administrator != null ">
+            <if test="administrator[0].uId != null">
+                and u_id=#{administrator[0].uId}
+            </if>
+            <if test="administrator[0].uName != null">
+                and u_name=#{administrator[0].uName}
+            </if>
+            <if test="administrator[0].uUserName != null">
+                and u_user_name=#{administrator[0].uUserName}
+            </if>
+            <if test="administrator[0].uPassword != null">
+                and u_password=#{administrator[0].uPassword}
+            </if>
+        </if>
+    </select>
+
+
+</mapper>
