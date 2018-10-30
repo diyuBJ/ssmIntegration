@@ -68,7 +68,7 @@ public class Administrator implements Serializable{
 	 * @Title:setUserName
 	 * @Description: TODO(设置UUserName	账户名)
 	 * @param uUserName
-	 */ 
+	 */
 	public void setUUserName(String uUserName){
 		this.uUserName=uUserName;
 	}
