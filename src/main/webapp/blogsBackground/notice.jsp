@@ -9,7 +9,7 @@
 <form action="/Article/checkAll" method="post" >
     <h1 class="page-header">操作</h1>
     <ol class="breadcrumb">
-        <li><a href="add-notice.jsp">增加公告</a></li>
+        <li><a href="#" onclick="loads('add-notice.jsp')">增加公告</a></li>
     </ol>
     <h1 class="page-header">管理 <span class="badge">3</span></h1>
     <div class="table-responsive">
@@ -27,7 +27,7 @@
                 <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
                 <td class="article-title">这是测试的公告标题这是测试的公告标题这是测试的公告标题这是测试的公告标题</td>
                 <td>2015-12-03</td>
-                <td><a href="">修改</a> <a rel="6">删除</a></td>
+                <td><a href="#" onclick="loads('update-notice.jsp')">修改</a> <a rel="6">删除</a></td>
             </tr>
             <tr>
                 <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>

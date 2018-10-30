@@ -34,7 +34,7 @@
                 <td class="hidden-sm">PHP、JavaScript</td>
                 <td class="hidden-sm">0</td>
                 <td>2015-12-03</td>
-                <td><a href="update-article.jsp">修改</a> <a rel="6">删除</a></td>
+                <td><a href="#" onclick="loads('update-article.jsp')">修改</a> <a rel="6">删除</a></td>
             </tr>
             <tr>
                 <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>

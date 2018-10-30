@@ -99,7 +99,6 @@
                     </div>
                 </form>
             </div>
-        </div>
 
 <script>
     // Replace the <textarea id="editor1"> with a CKEditor

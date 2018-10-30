@@ -1,7 +1,13 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>异清轩博客管理系统</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -61,36 +67,18 @@
                 <li><a href="#" onclick="loads('article.jsp')">文章</a></li>
 
                 <li><a href="#" onclick="loads('notice.jsp')">公告</a></li>
-                <li><a data-toggle="tooltip" data-placement="bottom" title="网站暂无留言功能">留言</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="category.jsp">栏目</a></li>
-                <li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">其他</a>
-                    <ul class="dropdown-menu" aria-labelledby="otherMenu">
-                        <li><a href="flink.jsp">友情链接</a></li>
-                        <li><a data-toggle="modal" data-target="#areDeveloping">访问记录</a></li>
-                    </ul>
-                </li>
+                <li><a href="#" onclick="loads('category.jsp')">栏目</a></li>
+                <li><a href="#" onclick="loads('flink.jsp')">友情链接</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a class="dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">用户</a>
-                    <ul class="dropdown-menu" aria-labelledby="userMenu">
-                        <li><a data-toggle="modal" data-target="#areDeveloping">管理用户组</a></li>
-                        <li><a href="manage-user.jsp">管理用户</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="loginlog.jsp">管理登录日志</a></li>
-                    </ul>
-                </li>
-                <li><a class="dropdown-toggle" id="settingMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">设置</a>
-                    <ul class="dropdown-menu" aria-labelledby="settingMenu">
-                        <li><a href="setting.jsp">基本设置</a></li>
-                        <li><a href="readset.jsp">阅读设置</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a data-toggle="modal" data-target="#areDeveloping">安全配置</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li class="disabled"><a>扩展菜单</a></li>
-                    </ul>
-                </li>
+                <%--<li><a href="manage-user.jsp">管理用户</a></li>--%>
+                <li><a href="#" onclick="loads('manage-user.jsp')">管理用户</a></li>
+                <%--<li><a href="loginlog.jsp">管理登录日志</a></li>--%>
+                <li><a href="#" onclick="loads('loginlog.jsp')">管理登录日志</a></li>
+                <%--<li><a href="setting.jsp">基本设置</a></li>/li>--%>
+                <li><a href="#" onclick="loads('setting.jsp')">基本设置</a></li>
             </ul>
         </aside>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
@@ -98,9 +86,6 @@
             <div class="row placeholders">
                 <div class="col-xs-6 col-sm-3 placeholder">
                     <h4>文章</h4>
-                    <span class="text-muted">0 条</span> </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <h4>评论</h4>
                     <span class="text-muted">0 条</span> </div>
                 <div class="col-xs-6 col-sm-3 placeholder">
                     <h4>友链</h4>
@@ -301,6 +286,109 @@
             </div>
             <div class="modal-body" style="text-align:center"> <img src="images/weixin.jpg" alt="" style="cursor:pointer"/> </div>
         </div>
+    </div>
+</div>
+<!--增加用户模态框-->
+<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
+    <div class="modal-dialog" role="document" style="max-width:450px;">
+        <form action="/User/add" method="post" autocomplete="off" draggable="false">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >增加用户</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table" style="margin-bottom:0px;">
+                        <thead>
+                        <tr> </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td wdith="20%">姓名:</td>
+                            <td width="80%"><input type="text" value="" class="form-control" name="truename" maxlength="10" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td wdith="20%">用户名:</td>
+                            <td width="80%"><input type="text" value="" class="form-control" name="username" maxlength="10" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td wdith="20%">电话:</td>
+                            <td width="80%"><input type="text" value="" class="form-control" name="usertel" maxlength="13" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td wdith="20%">新密码:</td>
+                            <td width="80%"><input type="password" class="form-control" name="password" maxlength="18" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td wdith="20%">确认密码:</td>
+                            <td width="80%"><input type="password" class="form-control" name="new_password" maxlength="18" autocomplete="off" /></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--用户信息模态框-->
+<div class="modal fade" id="seeUser" tabindex="-1" role="dialog" aria-labelledby="seeUserModalLabel">
+    <div class="modal-dialog" role="document" style="max-width:450px;">
+        <form action="/User/update" method="post" autocomplete="off" draggable="false">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">修改用户</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table" style="margin-bottom:0px;">
+                        <thead>
+                        <tr> </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td wdith="20%">姓名:</td>
+                            <td width="80%"><input type="text" value="" class="form-control" id="truename" name="truename" maxlength="10" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td wdith="20%">用户名:</td>
+                            <td width="80%"><input type="text" value="" class="form-control" id="username" name="username" maxlength="10" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td wdith="20%">电话:</td>
+                            <td width="80%"><input type="text" value="" class="form-control" id="usertel" name="usertel" maxlength="13" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td wdith="20%">旧密码:</td>
+                            <td width="80%"><input type="password" class="form-control" name="old_password" maxlength="18" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td wdith="20%">新密码:</td>
+                            <td width="80%"><input type="password" class="form-control" name="password" maxlength="18" autocomplete="off" /></td>
+                        </tr>
+                        <tr>
+                            <td wdith="20%">确认密码:</td>
+                            <td width="80%"><input type="password" class="form-control" name="new_password" maxlength="18" autocomplete="off" /></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr></tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="userid" value="" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <!--提示模态框-->
