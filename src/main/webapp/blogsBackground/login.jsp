@@ -31,9 +31,7 @@
         <input type="password" id="userPwd" name="userpwd" class="form-control" placeholder="请输入密码" required autocomplete="off" maxlength="18">
         <a href="main.jsp"><button class="btn btn-lg btn-primary btn-block" type="submit" id="signinSubmit">登录</button></a>
     </form>
-    <div class="footer">
-        <p><a href="index.jsp" data-toggle="tooltip" data-placement="left" title="不知道自己在哪?">回到后台 →</a></p>
-    </div>
+
 </div>
 <script src="js/bootstrap.min.js"></script>
 <script>
