@@ -37,7 +37,7 @@
 <script>
     $('[data-toggle="tooltip"]').tooltip();
     window.oncontextmenu = function(){
-        //return false;
+        //return false ;
     };
     $('.siteIcon img').click(function(){
         window.location.reload();
