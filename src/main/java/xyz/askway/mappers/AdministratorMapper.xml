@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="club.lygangdai.dao.CardDao">
-    <select id="selectCardById" parameterType="Integer" resultType="club.lygangdai.pojo.Card">
-    SELECT * FROM card WHERE c_id=#{cId}
+<mapper namespace="xyz.askway.dao.AdministratorDao">
+    <select id="getAdministrator" parameterType="xyz.askway.pojo.Administrator" resultType="xyz.askway.pojo.Administrator">
+      SELECT u_id,u_name,u_user_name,u_password FROM administrator WHERE
+        <if test="uId!=null">
+            u_id=#{uId}
+        </if>
+        <if test="u_name!=null">
+            u_name=#{uName}
+        </if>
+        <if test="u_user_name!=null">
+            u_user_name=#{uUserName}
+        </if>
+        <if test="u_password!=null">
+            u_password=#{uPassword}
+        </if>
     </select>
-    <insert id="addCard" parameterType="club.lygangdai.pojo.Card" keyProperty="cId" useGeneratedKeys="true" keyColumn="c_id">
-        insert into card(code) values(#{code})
-        <selectKey keyProperty="cId" resultType="int" order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-    </insert>
-    <delete id="deleteCardById" parameterType="Integer" >
-        DELETE FROM card WHERE c_id=#{cId}
-    </delete>
-    <update id="editCard" parameterType="club.lygangdai.pojo.Card">
-        UPDATE card SET code=#{code} WHERE c_id=#{cId}
-    </update>
+
+    <!--<insert id="addCard" parameterType="club.lygangdai.pojo.Card" keyProperty="cId" useGeneratedKeys="true" keyColumn="c_id">-->
+        <!--insert into card(code) values(#{code})-->
+        <!--<selectKey keyProperty="cId" resultType="int" order="AFTER">-->
+            <!--SELECT LAST_INSERT_ID()-->
+        <!--</selectKey>-->
+    <!--</insert>-->
+    <!--<delete id="deleteCardById" parameterType="Integer" >-->
+        <!--DELETE FROM card WHERE c_id=#{cId}-->
+    <!--</delete>-->
+    <!--<update id="editCard" parameterType="club.lygangdai.pojo.Card">-->
+        <!--UPDATE card SET code=#{code} WHERE c_id=#{cId}-->
+    <!--</update>-->
 </mapper>
