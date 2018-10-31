@@ -12,7 +12,7 @@
         <result property="aCommentnum" column="p_alias" />
         <result property="aStatusBar" column="p_alias" />
         <result property="label" column="label" />
-        <association property="administrator" column="u_id" select="xyz.askway.dao.AdministratorDao.getAdministratorById1"/>
+        <association property="administrator" column="u_id" select="xyz.askway.dao.AdministratorDao.getAdministratorById"/>
         <association property="programa" column="p_id" select="xyz.askway.dao.ProgramaDao.getProgramaById1"/>
     </resultMap>
     <!--查询所有-->

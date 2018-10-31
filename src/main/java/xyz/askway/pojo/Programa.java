@@ -14,6 +14,7 @@ public class Programa implements Serializable{
 	private Integer pId; 	//栏目id
 	private String pName; 	//栏目名称
 	private String pAlias; 	//栏目别名
+	private Integer pState; 	//状态 0隐藏 1显示
 	private List<Article> articleList; //文章
 
 	public List<Article> getArticleList() {
@@ -29,17 +30,22 @@ public class Programa implements Serializable{
 	 */ 
 	public Programa(){
 	}
-	/**
-	 * @Description: TODO(有参构造方法) 
-	 * @param pId	栏目id
-	 * @param pName	栏目名称
-	 * @param pAlias	栏目别名
-	 */ 
-	public Programa(Integer pId,String pName,String pAlias){
-		this.pId=pId;
-		this.pName=pName;
-		this.pAlias=pAlias;
+
+	public Programa(Integer pId, String pName, String pAlias, Integer pState) {
+		this.pId = pId;
+		this.pName = pName;
+		this.pAlias = pAlias;
+		this.pState = pState;
 	}
+
+	public Integer getpState() {
+		return pState;
+	}
+
+	public void setpState(Integer pState) {
+		this.pState = pState;
+	}
+
 	/**
 	 * @Title:setPId 
 	 * @Description: TODO(设置PId	栏目id)
@@ -92,8 +98,14 @@ public class Programa implements Serializable{
 	 * @Title:toString
 	 * @Description: TODO(toString)
 	 */
+	@Override
 	public String toString() {
-		return "Programa[pId=" + pId + ",pName=" + pName + ",pAlias=" + pAlias + "]";
+		return "Programa{" +
+				"pId=" + pId +
+				", pName='" + pName + '\'' +
+				", pAlias='" + pAlias + '\'' +
+				", pState=" + pState +
+				'}';
 	}
 }
 

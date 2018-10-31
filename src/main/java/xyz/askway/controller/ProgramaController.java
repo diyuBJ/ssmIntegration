@@ -12,6 +12,7 @@ import xyz.askway.service.ProgramaService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -26,13 +27,32 @@ public class ProgramaController {
     @Resource
     private ProgramaService programaService;
 
-    @RequestMapping(value = "/selevtPrograma.do",method = RequestMethod.POST,produces="text/html;charset=UTF-8")
+    @RequestMapping(value = "/selevtPrograma.do",produces="text/html;charset=UTF-8")
     @ResponseBody
-    public String selevtPrograma(){
+    public String getPrograma(){
+        //查询所有栏目
         List<Programa> programas = programaService.selectPrograma();
         String data = JSONObject.toJSONString(programas);
         return data;
     }
+    @RequestMapping(value = "/addPrograma.do")
+    public void addPrograma(Programa programa){
+        //添加栏目
+        programaService.addPrograma(programa);
+    }
+    @RequestMapping(value = "/updatePrograma.do")
+    public void updatePrograma(Programa programa){
+        //修改栏目
+        System.out.println(programa+"*****************");
+        programaService.updatePrograma(programa);
+    }
 
+    @RequestMapping(value = "/getProgramaById.do",produces="text/html;charset=UTF-8")
+    @ResponseBody
+    public String getProgramaById(Programa programa){
+        //根据id查询
+        String data = JSONObject.toJSONString(programaService.getProgramaById1(programa.getPId()));
+        return data;
+    }
 
 }

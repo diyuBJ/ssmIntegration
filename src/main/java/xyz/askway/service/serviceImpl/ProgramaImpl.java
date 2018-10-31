@@ -44,6 +44,6 @@ public class ProgramaImpl implements ProgramaService {
 
     @Override
     public void updatePrograma(Programa programa) {
-
+        programaDao.updatePrograma(programa);
     }
 }
