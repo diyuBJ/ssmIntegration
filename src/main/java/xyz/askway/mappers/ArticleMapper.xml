@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.askway.dao.ArticleDao">
+    <!--映射Article对象的resultMap（结果映射集）-->
+    <resultMap id="articleMapper" type="xyz.askway.pojo.Article">
+        <id property="aId" column="a_id" />
+        <result property="aTitle" column="p_name" />
+        <result property="aContent" column="p_alias" />
+        <result property="aTitleImg" column="p_alias" />
+        <result property="aTime" column="p_alias" />
+        <result property="aReadingQuantity" column="p_alias" />
+        <result property="aCommentnum" column="p_alias" />
+        <result property="aStatusBar" column="p_alias" />
+        <result property="label" column="label" />
+        <association property="administrator" column="u_id" select="xyz.askway.dao.AdministratorDao.getAdministratorById1"/>
+        <association property="programa" column="p_id" select="xyz.askway.dao.ProgramaDao.getProgramaById1"/>
+    </resultMap>
+    <!--查询所有-->
+    <select id="selectArticle"  resultMap="articleMapper">
+          select a_id,a_title,a_content,a_title_img,a_time,a_reading_quantity,a_commentnum,p_id,label,a_status_bar,u_id from  article
+     </select>
+    <!--根据id查询-->
+     <select id="getArticleById" parameterType="String" resultMap="articleMapper">
+          select a_id,a_title,a_content,a_title_img,a_time,a_reading_quantity,a_commentnum,p_id,label,a_status_bar,u_id from  article where a_id=#{aId}
+     </select>
+    <!--根据栏目id查询Article-->
+    <select id="getArticleByProgramaId" parameterType="Integer" resultMap="articleMapper">
+          select a_id,a_title,a_content,a_title_img,a_time,a_reading_quantity,a_commentnum,p_id,label,a_status_bar,u_id from  article where p_id=#{pId}
+     </select>
+    <!--模糊查询（标题或者标签）-->
+    <select id="getArticleLike" parameterType="String" resultMap="articleMapper">
+        <bind name="text" value="'%' + _parameter + '%'"/>
+        select a_id,a_title,a_content,a_title_img,a_time,a_reading_quantity,a_commentnum,p_id,label,a_status_bar,u_id
+        from  article where a_title like #{text} or label like #{text} ORDER BY a_time desc
+     </select>
+    <!--增加-->
+    <insert id="addArticle" parameterType="xyz.askway.pojo.Article" keyProperty="aId" useGeneratedKeys="true" keyColumn="a_id" >
+    insert into article(a_id,a_title,a_content,a_title_img,a_time,a_reading_quantity,a_commentnum,p_id,l_id,a_status_bar,u_id) values(#{aId},#{aTitle},#{aContent},#{aTitleImg},#{aTime},#{aReadingQuantity},#{aCommentnum},#{programa.pId},#{label.lId},#{aStatusBar},#{administrator.uId})
+        <selectKey keyProperty="aId" resultType="String" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <delete id="deleteArticle" parameterType="String" >
+        DELETE FROM article WHERE a_id=#{aId}
+    </delete>
+
+    <update id="updateArticle" parameterType="xyz.askway.pojo.Article">
+        UPDATE article
+        <trim prefix="set" suffixOverrides=",">
+            <if test="aTitle!=null">a_title=#{aTitle},</if>
+            <if test="aContent!=null">a_content=#{aContent},</if>
+            <if test="aTitleImg!=null">a_title_img=#{aTitleImg},</if>
+            <if test="aTime!=null">a_time=#{aTime},</if>
+            <if test="aReadingQuantity!=null">a_reading_quantity=#{aReadingQuantity},</if>
+            <if test="aCommentnum!=null">a_commentnum=#{aCommentnum},</if>
+            <if test="programa.pId!=null">p_id=#{programa.pId},</if>
+            <if test="label.lId!=null">l_id=#{label.lId},</if>
+            <if test="aStatusBar!=null">a_status_bar=#{aStatusBar},</if>
+            <if test="administrator.uId!=null">u_id=#{administrator.uId},</if>
+        </trim>
+        WHERE a_id=#{aId}
+    </update>
+</mapper>

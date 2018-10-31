@@ -125,6 +125,18 @@
         $("#category1").html("");
         $("#category1").load(url);
     }
+    $.ajax({
+        url:"/selevtPrograma.do",
+        type:"POST",
+        data:{},
+        dataType:"JSON",
+        resultType:"JSON",
+        success:function(data){
+            $.each(data,function(i,val){
+                alert(val.pName)
+            })
+        }
+    })
 </script>
 
 

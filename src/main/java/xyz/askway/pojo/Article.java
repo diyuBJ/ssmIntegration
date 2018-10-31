@@ -18,7 +18,7 @@ public class Article implements Serializable{
 	private Integer aReadingQuantity; 	//阅读量
 	private Integer aCommentnum; 	//评论数
 	private Programa programa;//栏目id 外键
-	private Label label;//标签id 外键
+	private String label;//标签
 	private Administrator administrator;//管理员id 外键
 	private Integer aStatusBar; 	//状态 0不公开 1公开
 	/**
@@ -27,7 +27,7 @@ public class Article implements Serializable{
 	public Article(){
 	}
 
-	public Article(String aId, String aTitle, String aContent, String aTitleImg, String aTime, Integer aReadingQuantity, Integer aCommentnum, Programa programa, Label label, Administrator administrator, Integer aStatusBar) {
+	public Article(String aId, String aTitle, String aContent, String aTitleImg, String aTime, Integer aReadingQuantity, Integer aCommentnum, String label, Integer aStatusBar) {
 		this.aId = aId;
 		this.aTitle = aTitle;
 		this.aContent = aContent;
@@ -35,9 +35,7 @@ public class Article implements Serializable{
 		this.aTime = aTime;
 		this.aReadingQuantity = aReadingQuantity;
 		this.aCommentnum = aCommentnum;
-		this.programa = programa;
 		this.label = label;
-		this.administrator = administrator;
 		this.aStatusBar = aStatusBar;
 	}
 
@@ -179,11 +177,11 @@ public class Article implements Serializable{
 		this.programa = programa;
 	}
 
-	public Label getLabel() {
+	public String getLabel() {
 		return label;
 	}
 
-	public void setLabel(Label label) {
+	public void setLabel(String label) {
 		this.label = label;
 	}
 
@@ -205,6 +203,7 @@ public class Article implements Serializable{
 				", aTime='" + aTime + '\'' +
 				", aReadingQuantity=" + aReadingQuantity +
 				", aCommentnum=" + aCommentnum +
+				", label='" + label + '\'' +
 				", aStatusBar=" + aStatusBar +
 				'}';
 	}

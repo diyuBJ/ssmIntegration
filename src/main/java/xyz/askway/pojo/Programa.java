@@ -1,6 +1,7 @@
 package xyz.askway.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @ClassName:programa 
@@ -13,6 +14,16 @@ public class Programa implements Serializable{
 	private Integer pId; 	//栏目id
 	private String pName; 	//栏目名称
 	private String pAlias; 	//栏目别名
+	private List<Article> articleList; //文章
+
+	public List<Article> getArticleList() {
+		return articleList;
+	}
+
+	public void setArticleList(List<Article> articleList) {
+		this.articleList = articleList;
+	}
+
 	/**
 	 * @Description: TODO(无参构造方法) 
 	 */ 
