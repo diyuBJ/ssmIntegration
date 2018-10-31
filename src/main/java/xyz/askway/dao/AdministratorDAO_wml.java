@@ -21,5 +21,4 @@ public interface AdministratorDAO_wml {
      */
     List<Administrator> query(@Param("administrator")Administrator... administrator);
 
-
 }
