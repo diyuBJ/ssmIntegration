@@ -165,11 +165,11 @@
       <version>1.3.1</version>
     </dependency>
     <!-- 文本编辑器-->
-    <dependency>
-      <groupId>ckeditor</groupId>
-      <artifactId>ckeditor-java-core</artifactId>
-      <version>3.5.3</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>ckeditor</groupId>-->
+      <!--<artifactId>ckeditor-java-core</artifactId>-->
+      <!--<version>3.5.3</version>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>

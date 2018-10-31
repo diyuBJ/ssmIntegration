@@ -64,6 +64,7 @@
                     <li><a href="category.jsp">管理系统</a></li>
                     <li><a href="category.jsp">授人以渔</a></li>
                     <li><a href="category.jsp">程序人生</a></li>
+                    <li><a href="/add.do">測試</a></li>
                 </ul>
                 <form class="navbar-form visible-xs" action="/Search" method="post">
                     <div class="input-group">

@@ -14,6 +14,12 @@
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="apple-touch-icon-precomposed" href="images/icon/icon.png">
     <link rel="shortcut icon" href="images/icon/favicon.ico">
+
+    <%--<link rel="stylesheet" type="text/css" href="../css/xcConfirm.css"/>--%>
+    <script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
+    <%--<script src="../js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>--%>
+    <script src="layer/layer.js"></script>
+
     <script src="js/jquery-2.1.4.min.js"></script>
     <!--[if gte IE 9]>
     <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
@@ -38,13 +44,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="">消息 <span class="badge">1</span></a></li>
-                        <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">admin <span class="caret"></span></a>
+                        <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.administrator.UUserName}<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-menu-left">
                                 <li><a title="查看或修改个人信息" data-toggle="modal" data-target="#seeUserInfo">个人信息</a></li>
                                 <li><a title="查看您的登录记录" data-toggle="modal" data-target="#seeUserLoginlog">登录记录</a></li>
                             </ul>
                         </li>
-                        <li><a href="login.jsp" onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a></li>
+                        <li><a  href="#" id="exit" >退出登录</a></li>
                         <li><a data-toggle="modal" data-target="#WeChat">帮助</a></li>
                     </ul>
                     <form action="" method="post" class="navbar-form navbar-right" role="search">
@@ -421,6 +427,28 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/admin-scripts.js"></script>
 <script >
+$(function () {
+    $("#exit").click(function () {
+        layer.msg('您真的要退出Radish</br>管理系统吗？', {
+            time: 20000, //20s后自动关闭
+            anim:0, //窗体弹出的效果 0~6
+            btn: ['点错了', '确认退出'],
+            offset: [
+                150 //高(y)
+                ,600 //宽(x)
+            ],
+            btn1: function (index, layero) {
+                // alert("取消")
+                layer.close(index); //如果设定了yes或者btn1回调，需进行手工关闭
+            },
+            btn2: function(index, layero){
+                // alert("确认")
+                $(location).attr('href', 'login.jsp');
+            }
+        });
+    })
+
+});
     //导入页 面
     function loads(url) {
         $("#main").html("");
