@@ -1,6 +1,7 @@
 package xyz.askway.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -107,7 +108,8 @@ public class AdministratorController_wlm {
     @RequestMapping("trackmod")
     public void TRACKMOD(HttpServletResponse response,Integer curr,Integer limit) throws IOException {
         PrintWriter writer = response.getWriter();
-        writer.write(JSONObject.toJSONString(adms.queryLog(curr, limit)));
+        //SerializerFeature.DisableCircularReferenceDetect:fastjson把对象转化成json避免$ref
+        writer.write(JSONObject.toJSONString(adms.queryLog(curr, limit),SerializerFeature.DisableCircularReferenceDetect));
         writer.flush();
         writer.close();
     }

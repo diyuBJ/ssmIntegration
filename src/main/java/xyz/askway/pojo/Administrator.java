@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @Description: TODO(类说明：管理员表 )
  * @author Uncle liu 
  * @date 2018-10-29 17:09:20
- */ 
+ */
 public class Administrator implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String uId; 	//管理员id

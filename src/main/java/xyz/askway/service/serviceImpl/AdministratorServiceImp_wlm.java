@@ -73,7 +73,7 @@ public class AdministratorServiceImp_wlm implements AdministratorService_wml {
     @Override
     public List<Log> queryLog(Integer page,Integer record) {
         try{
-            return adminDAO.queryLog(page,record);
+            return adminDAO.queryLog(page==0?0:(page-1)*record,record);
         }catch(Exception e){
             Log4j2Controller.error("错误：execute Line 76 'return adminDAO.queryLog(page,record);' ERROR.");
         }

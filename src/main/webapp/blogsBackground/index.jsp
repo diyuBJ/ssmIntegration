@@ -440,8 +440,8 @@ $(function () {
             anim:0, //窗体弹出的效果 0~6
             btn: ['点错了', '确认退出'],
             offset: [
-                150 //高(y)
-                ,600 //宽(x)
+                '27%' //高(y)
+                ,'47%' //宽(x)
             ],
             btn1: function (index, layero) {
                 // alert("取消")

@@ -12,7 +12,7 @@
                 <li><a href="/Loginlog/delete/action/all">清除所有登录记录</a></li>
                 <li><a href="/Loginlog/delete/action/current">清除本人登录记录</a></li>
             </ol>
-            <h1 class="page-header">管理 <span class="badge">9</span></h1>
+            <h1 class="page-header">管理 <span class="badge">${sessionScope.logSum==null ? 0 : sessionScope.logSum}</span></h1>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
                     <thead>
@@ -24,7 +24,7 @@
                         <th><span class="glyphicon glyphicon-remove"></span> <span class="visible-lg">删除</span></th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbl">
                     <c:forEach var="l" items="${sessionScope.logList}">
                         <tr>
                             <td>${l.logId}</td>
@@ -75,9 +75,17 @@
                         url:"/trackmod.do",
                         data: {"curr":obj.curr,"limit":obj.limit},
                         async:true,
+                        datatype:"json",
+                        resultType:"json",
                         cache:false, //不缓存此页面
                         success:function (data){
-                            console.log(data);
+                            // console.log(data);
+                            var lists= JSON.parse(data);
+                            var vals='';
+                            for (obj in lists){
+                               vals=vals+ "<tr> <td>"+lists[obj].logId+"</td> <td class='article-title'>"+lists[obj].administrator.uUserName+"</td> <td>"+lists[obj].logTime+"</td> <td>"+lists[obj].logIp+"</td> <td><a rel='1'>删除</a></td> </tr>"
+                            }
+                            $("#tbl").html(vals);
                         }
                     });
                 }
