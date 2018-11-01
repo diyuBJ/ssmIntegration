@@ -21,7 +21,7 @@
                         <th><span class="glyphicon glyphicon-user"></span> <span class="visible-lg">用户</span></th>
                         <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">时间</span></th>
                         <th><span class="glyphicon glyphicon-adjust"></span> <span class="visible-lg">IP</span></th>
-                        <th><span class="glyphicon glyphicon-remove"></span> <span class="visible-lg">删除</span></th>
+                        <th><span class="glyphicon glyphicon-remove"></span> <span class="visible-lg">操作</span></th>
                     </tr>
                     </thead>
                     <tbody id="tbl">
@@ -94,28 +94,7 @@
     });
 
 
-    //是否确认删除
-    $(function(){
-        $("#main table tbody tr td a").click(function(){
-            var name = $(this);
-            var id = name.attr("rel"); //对应id
-            if (event.srcElement.outerText === "删除")
-            {
-                if(window.confirm("此操作不可逆，是否确认？"))
-                {
-                    $.ajax({
-                        type: "POST",
-                        url: "/Loginlog/delete/action/one",
-                        data: "id=" + id,
-                        cache: false, //不缓存此页面
-                        success: function (data) {
-                            window.location.reload();
-                        }
-                    });
-                };
-            };
-        });
-    });
+
 </script>
 </body>
 </html>
