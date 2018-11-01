@@ -14,6 +14,7 @@ public class Log implements Serializable{
 	private String uId; 	//管理员id 外键
 	private String logIp; 	//ip
 	private String logTime; 	//登录时间
+	private Administrator administrator; //管理员对象
 	/**
 	 * @Description: TODO(无参构造方法) 
 	 */ 
@@ -96,10 +97,32 @@ public class Log implements Serializable{
 	public String getLogTime(){
 		return logTime;
 	}
+
+	/**
+	 * 2018/10/31 10:10
+	 * #author:wlm
+	 * #function:获得管理员对象
+	 * #analysis:
+	 */
+	public Administrator getAdministrator() {
+		return administrator;
+	}
+
+	/**
+	 * 2018/10/31 10:10
+	 * #author:wlm
+	 * #function:设置管理员对象
+	 * #analysis:
+	 */
+	public void setAdministrator(Administrator administrator) {
+		this.administrator = administrator;
+	}
+
 	/**
 	 * @Title:toString 
 	 * @Description: TODO(toString)
-	 */ 
+	 */
+
 	public String toString() { 
 		return "Log[logId=" + logId + ",uId=" + uId + ",logIp=" + logIp + ","+
 		"logTime=" + logTime + "]";

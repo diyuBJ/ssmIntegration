@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
             <h1 class="page-header">操作</h1>
             <ol class="breadcrumb">
                 <li><a href="/Loginlog/delete/action/all">清除所有登录记录</a></li>
@@ -24,85 +25,67 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td class="article-title">admin</td>
-                        <td>2016-1-11 15:09:11</td>
-                        <td>192.168.1.1:1245</td>
-                        <td><a rel="1">删除</a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td class="article-title">admin</td>
-                        <td>2016-1-11 15:09:11</td>
-                        <td>192.168.1.1:1245</td>
-                        <td><a rel="2">删除</a></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td class="article-title">admin</td>
-                        <td>2016-1-11 15:09:11</td>
-                        <td>192.168.1.1:1245</td>
-                        <td><a rel="3">删除</a></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td class="article-title">admin</td>
-                        <td>2016-1-11 15:09:11</td>
-                        <td>192.168.1.1:1245</td>
-                        <td><a rel="4">删除</a></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td class="article-title">admin</td>
-                        <td>2016-1-11 15:09:11</td>
-                        <td>192.168.1.1:1245</td>
-                        <td><a rel="5">删除</a></td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td class="article-title">admin</td>
-                        <td>2016-1-11 15:09:11</td>
-                        <td>192.168.1.1:1245</td>
-                        <td><a rel="6">删除</a></td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td class="article-title">admin</td>
-                        <td>2016-1-11 15:09:11</td>
-                        <td>192.168.1.1:1245</td>
-                        <td><a rel="7">删除</a></td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td class="article-title">admin</td>
-                        <td>2016-1-11 15:09:11</td>
-                        <td>192.168.1.1:1245</td>
-                        <td><a rel="8">删除</a></td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td class="article-title">admin</td>
-                        <td>2016-1-11 15:09:11</td>
-                        <td>192.168.1.1:1245</td>
-                        <td><a rel="9">删除</a></td>
-                    </tr>
+                    <c:forEach var="l" items="${sessionScope.logList}">
+                        <tr>
+                            <td>${l.logId}</td>
+                            <td class="article-title">${l.administrator.UUserName}</td>
+                            <td>${l.logTime}</td>
+                            <td>${l.logIp}</td>
+                            <td><a rel="1">删除</a></td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
             <footer class="message_footer">
                 <nav>
                     <ul class="pagination pagenav">
-                        <li class="disabled"><a aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
-                        <li class="active"><a>1</a></li>
-                        <li class="disabled"><a aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
+                        <div id="demo3"></div>
                     </ul>
                 </nav>
             </footer>
-
+<input type="hidden" id="sum" value="${sessionScope.logSum==null ? 0 : sessionScope.logSum}">
 <script src="js/bootstrap.min.js"></script>
 <script src="js/admin-scripts.js"></script>
 <script>
+    layui.use(['laypage', 'layer'], function() {
+        var laypage = layui.laypage
+            , layer = layui.layer;
+        //自定义首页、尾页、上一页、下一页文本
+        laypage.render({
+            elem: 'demo3'
+            ,theme: '#1E9FFF' //自定义颜色
+            ,count: $("#sum").val() //总记录数，从服务端得到
+            ,layout: [ 'prev', 'page', 'next', 'limit'] //开启的功能
+            ,limit: 10//每页显示记录数
+            ,limits:[10, 20, 30]
+            ,first: '首页'
+            ,last: '末页'
+            ,prev: '<em>«</em>'
+            ,next: '<em>»</em>'
+            ,jump: function(obj, first){//回调
+                //obj包含了当前分页的所有参数，比如：
+                // console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                // console.log(obj.limit); //得到每页显示的条数
+                //首次不执行
+                if(!first){
+                    // do something
+                    $.ajax({
+                        type: 'post',
+                        url:"/trackmod.do",
+                        data: {"curr":obj.curr,"limit":obj.limit},
+                        async:true,
+                        cache:false, //不缓存此页面
+                        success:function (data){
+                            console.log(data);
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+
     //是否确认删除
     $(function(){
         $("#main table tbody tr td a").click(function(){

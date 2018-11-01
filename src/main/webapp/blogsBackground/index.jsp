@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -15,10 +16,12 @@
     <link rel="apple-touch-icon-precomposed" href="images/icon/icon.png">
     <link rel="shortcut icon" href="images/icon/favicon.ico">
 
-    <%--<link rel="stylesheet" type="text/css" href="../css/xcConfirm.css"/>--%>
+
     <script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
-    <%--<script src="../js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>--%>
     <script src="layer/layer.js"></script>
+
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="layui/layui.js" charset="utf-8"></script>
 
     <script src="js/jquery-2.1.4.min.js"></script>
     <!--[if gte IE 9]>
@@ -32,6 +35,9 @@
     <!--[endif]-->
 
 </head>
+<c:if test="${administrator==null}">
+    <c:redirect url="login.jsp"></c:redirect>
+</c:if>
 
 <body class="user-select">
 <section class="container-fluid">
@@ -82,7 +88,7 @@
                 <%--<li><a href="manage-user.jsp">管理用户</a></li>--%>
                 <li><a href="#" onclick="loads('manage-user.jsp')">管理用户</a></li>
                 <%--<li><a href="loginlog.jsp">管理登录日志</a></li>--%>
-                <li><a href="#" onclick="loads('loginlog.jsp')">管理登录日志</a></li>
+                <li><a href="#" onclick="loads('/administratorLogToValue.do')">管理登录日志</a></li>
                 <%--<li><a href="setting.jsp">基本设置</a></li>/li>--%>
                 <li><a href="#" onclick="loads('setting.jsp')">基本设置</a></li>
             </ul>
@@ -443,7 +449,7 @@ $(function () {
             },
             btn2: function(index, layero){
                 // alert("确认")
-                $(location).attr('href', 'login.jsp');
+                $(location).attr('href', '/exit.do');
             }
         });
     })
