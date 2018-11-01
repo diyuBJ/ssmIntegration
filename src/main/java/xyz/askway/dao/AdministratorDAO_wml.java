@@ -47,4 +47,12 @@ public interface AdministratorDAO_wml {
      */
     List<Map<String,Object>> logStatisticsSum();
 
+    /**
+     * 2018/11/1 15:02
+     * #author:wlm
+     * #function:删除管理员登录日志
+     * #analysis:
+     */
+    Integer deleteLogs(@Param("logID") Map<String,Object> LogID);
+
 }

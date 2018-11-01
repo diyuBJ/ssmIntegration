@@ -48,4 +48,12 @@ public interface AdministratorService_wml {
      */
     Integer logStatisticsSum();
 
+    /**
+     * 2018/11/1 15:02
+     * #author:wlm
+     * #function:删除管理员登录日志
+     * #analysis:
+     */
+    Integer deleteLogs(Map<String,Object> LogID);
+
 }
