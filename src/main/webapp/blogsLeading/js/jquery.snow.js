@@ -6,7 +6,7 @@
             'position': 'absolute',
             'top': '-50px',
             'z-index': '99999'
-        }).jsp('❄'),
+        }).html('❄'),
             documentHeight = $(document).height(),
             documentWidth = $(document).width(),
             defaults = {
