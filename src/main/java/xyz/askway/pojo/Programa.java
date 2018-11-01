@@ -1,6 +1,7 @@
 package xyz.askway.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @ClassName:programa 
@@ -13,22 +14,38 @@ public class Programa implements Serializable{
 	private Integer pId; 	//栏目id
 	private String pName; 	//栏目名称
 	private String pAlias; 	//栏目别名
+	private Integer pState; 	//状态 0隐藏 1显示
+	private List<Article> articleList; //文章
+
+	public List<Article> getArticleList() {
+		return articleList;
+	}
+
+	public void setArticleList(List<Article> articleList) {
+		this.articleList = articleList;
+	}
+
 	/**
 	 * @Description: TODO(无参构造方法) 
 	 */ 
 	public Programa(){
 	}
-	/**
-	 * @Description: TODO(有参构造方法) 
-	 * @param pId	栏目id
-	 * @param pName	栏目名称
-	 * @param pAlias	栏目别名
-	 */ 
-	public Programa(Integer pId,String pName,String pAlias){
-		this.pId=pId;
-		this.pName=pName;
-		this.pAlias=pAlias;
+
+	public Programa(Integer pId, String pName, String pAlias, Integer pState) {
+		this.pId = pId;
+		this.pName = pName;
+		this.pAlias = pAlias;
+		this.pState = pState;
 	}
+
+	public Integer getpState() {
+		return pState;
+	}
+
+	public void setpState(Integer pState) {
+		this.pState = pState;
+	}
+
 	/**
 	 * @Title:setPId 
 	 * @Description: TODO(设置PId	栏目id)
@@ -78,11 +95,17 @@ public class Programa implements Serializable{
 		return pAlias;
 	}
 	/**
-	 * @Title:toString 
+	 * @Title:toString
 	 * @Description: TODO(toString)
-	 */ 
-	public String toString() { 
-		return "Programa[pId=" + pId + ",pName=" + pName + ",pAlias=" + pAlias + "]";
+	 */
+	@Override
+	public String toString() {
+		return "Programa{" +
+				"pId=" + pId +
+				", pName='" + pName + '\'' +
+				", pAlias='" + pAlias + '\'' +
+				", pState=" + pState +
+				'}';
 	}
 }
 

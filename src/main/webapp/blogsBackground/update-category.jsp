@@ -7,33 +7,60 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
             <h1 class="page-header">修改栏目</h1>
-            <form action="/Category/update" method="post">
+<form action="#" method="post" id="showDataForm1" autocomplete="off" onsubmit="return updateReport();">
                 <div class="form-group">
-                    <label for="category-name">栏目名称</label>
-                    <input type="text" id="category-name" name="name" value="前端技术" class="form-control" placeholder="在此处输入栏目名称" required autocomplete="off">
+                    <label for="pName">栏目名称</label>
+                    <input type="hidden" value="" id="pId" name="pId"/>
+                    <input type="text" id="pName" name="pName" value="" class="form-control" placeholder="在此处输入栏目名称" required autocomplete="off">
                     <span class="prompt-text">这将是它在站点上显示的名字。</span> </div>
                 <div class="form-group">
-                    <label for="category-alias">栏目别名</label>
-                    <input type="text" id="category-alias" name="alias" value="web" class="form-control" placeholder="在此处输入栏目别名" required autocomplete="off">
+                    <label for="pAlias">栏目别名</label>
+                    <input type="text" id="pAlias" name="pAlias" value="" class="form-control" placeholder="在此处输入栏目别名" required autocomplete="off">
                     <span class="prompt-text">“别名”是在URL中使用的别称，它可以令URL更美观。通常使用小写，只能包含字母，数字和连字符（-）。</span> </div>
-                <div class="form-group">
-                    <label for="category-fname">父节点</label>
-                    <select id="category-fname" class="form-control" name="fid">
-                        <option value="0" selected>无</option>
-                        <option value="1">前端技术</option>
-                        <option value="2">后端程序</option>
-                        <option value="3">管理系统</option>
-                        <option value="4">授人以渔</option>
-                        <option value="5">程序人生</option>
-                    </select>
-                    <span class="prompt-text">栏目是有层级关系的，您可以有一个“音乐”分类目录，在这个目录下可以有叫做“流行”和“古典”的子目录。</span> </div>
-                <div class="form-group">
-                    <label for="category-keywords">关键字</label>
-                    <input type="text" id="category-keywords" name="keywords" value="HTML,CSS+DIV,JavaScript,jQuery" class="form-control" placeholder="在此处输入栏目关键字" autocomplete="off">
-                    <span class="prompt-text">关键字会出现在网页的keywords属性中。</span> </div>
-                <div class="form-group">
-                    <label for="category-describe">描述</label>
-                    <textarea class="form-control" id="category-describe" name="describe" rows="4" autocomplete="off">这是栏目的描述这是栏目的描述这是栏目的描述这是栏目的描述</textarea>
-                    <span class="prompt-text">描述会出现在网页的description属性中。</span> </div>
+                <div class="add-article-box-content">
+                    <p><label>状态：</label><input type="radio" id="pState1" name="pState" value="1" />公开 <input type="radio" id="pState2" name="pState" value="0" />隐藏</p>
+                </div>
                 <button class="btn btn-primary" type="submit" name="submit">更新</button>
             </form>
+<script>
+    $.ajax({
+        type: "POST",
+        url: "/getProgramaById.do",
+        data : {"pId":localStorage.pid},
+        dataType:"JSON",
+        resultType:"JSON",
+        success: function(data) {
+            //清空数据
+            localStorage.clear();
+            $("#pId").val(data.pId);
+            $("#pName").val(data.pName);
+            $("#pAlias").val(data.pAlias);
+            if(data.pState==1){
+                $("#pState1").attr("checked",'checked');
+            }else{
+                $("#pState2").attr("checked",'checked');
+            }
+
+        }
+    });
+
+    function updateReport() {
+        $.ajax({
+            type: "POST",
+            url: "/updatePrograma.do",
+            data : $('#showDataForm1').serializeArray(),
+            dataType:"JSON",
+            resultType:"JSON",
+            success: function(data) {
+            }
+        });
+        $('#showDataForm1').find('input[type=text],select,input[type=hidden]').each(function() {
+            $(this).val('');
+        });
+        $("#tbo1");
+        layer.msg("修改栏目成功")
+        $("#main").html("");
+        $("#main").load("category.jsp");
+        return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+    }
+</script>

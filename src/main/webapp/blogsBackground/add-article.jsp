@@ -73,17 +73,18 @@
                         <div class="add-article-box">
                             <h2 class="add-article-box-title"><span>标签</span></h2>
                             <div class="add-article-box-content">
-                                <input type="text" class="form-control" placeholder="输入新标签" name="tags" autocomplete="off">
+                                <input type="text" class="form-control" placeholder="输入新标签" name="tags" autocomplete="off" class="form-control" required autofocus >
                                 <span class="prompt-text">多个标签请用英文逗号,隔开</span> </div>
                         </div>
                         <div class="add-article-box">
                             <h2 class="add-article-box-title"><span>标题图片</span></h2>
                             <div class="add-article-box-content">
-                                <input type="text" class="form-control" placeholder="点击按钮选择图片" id="pictureUpload" name="titlepic" autocomplete="off">
+                                <input type="image" id="imgs" src=""/>
+                                <input type="file" onchange="aaa(this)" class="form-control" placeholder="点击按钮选择图片" id="pictureUpload" name="titlepic" autocomplete="off" class="form-control" required autofocus>
                             </div>
-                            <div class="add-article-box-footer">
-                                <button class="btn btn-default" type="button" ID="upImage">选择</button>
-                            </div>
+                            <%--<div class="add-article-box-footer">--%>
+                                <%--<button class="btn btn-default" type="button" ID="upImage">选择</button>--%>
+                            <%--</div>--%>
                         </div>
                         <div class="add-article-box">
                             <h2 class="add-article-box-title"><span>发布</span></h2>
@@ -93,7 +94,7 @@
                                 <p><label>发布于：</label><span class="article-time-display"><input style="border: none;" type="datetime" name="time" value="2016-01-09 17:29:37" /></span></p>
                             </div>
                             <div class="add-article-box-footer">
-                                <button class="btn btn-primary" type="submit" name="submit">发布</button>
+                                <button class="btn btn-primary" type="submit" name="submit" onclick="aaa()">发布</button>
                             </div>
                         </div>
                     </div>
@@ -105,4 +106,23 @@
     // instance, using default configuration.
     p_desc=CKEDITOR.replace( 'editor1' );
     console.log(p_desc.getData()); //取包含html代码的值
+function aaa(obj) {
+    // alert($("#pictureUpload"))
+        //解决C:\fakepath问题
+        var oFReader = new FileReader();
+        var file =obj.files[0];
+        oFReader.readAsDataURL(file);
+        oFReader.onloadend = function(oFRevent){
+            var src = oFRevent.target.result;
+            $('#imgs').attr('src',src);
+        }
+        //判断图片格式
+        var fileName=obj.value;
+        var suffixIndex=fileName.lastIndexOf(".");
+        var suffix=fileName.substring(suffixIndex+1).toUpperCase();
+        if(suffix!="BMP"&&suffix!="JPG"&&suffix!="JPEG"&&suffix!="PNG"&&suffix!="GIF"){
+            alert( "请上传图片（格式BMP、JPG、JPEG、PNG、GIF等）!");
+        }
+
+}
 </script>

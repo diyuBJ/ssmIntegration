@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.askway.dao.ProgramaDao">
+    <!--映射Person对象的resultMap（结果映射集）-->
+    <resultMap id="programaMapper" type="xyz.askway.pojo.Programa">
+        <id property="pId" column="p_id" />
+        <result property="pName" column="p_name" />
+        <result property="pAlias" column="p_alias" />
+        <result property="pState" column="p_state" />
+        <collection property="articleList" column="p_id" select="xyz.askway.dao.ArticleDao.getArticleByProgramaId"/>
+    </resultMap>
+    <!--查询所有-->
+    <select id="selectPrograma"  resultMap="programaMapper">
+          select p_id,p_name,p_alias,p_state from  programa order by p_id asc
+     </select>
+    <!--根据id查询-->
+    <select id="getProgramaById1" parameterType="Integer" resultType="xyz.askway.pojo.Programa">
+         select p_id,p_name,p_alias,p_state from  programa where p_id=#{pId} order by p_id asc
+     </select>
+    <!--根据id查询-->
+    <select id="getProgramaById" parameterType="Integer" resultMap="programaMapper">
+        select p_id,p_name,p_alias,p_state from  programa where p_id=#{pId} order by p_id asc
+     </select>
+    <!--增加-->
+    <insert id="addPrograma" parameterType="xyz.askway.pojo.Programa" keyProperty="pId" useGeneratedKeys="true" keyColumn="p_id" >
+        insert into programa(p_name,p_alias,p_state) values(#{pName},#{pAlias},#{pState})
+        <selectKey keyProperty="pId" resultType="Integer" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <delete id="deletePrograma" parameterType="Integer" >
+        DELETE FROM programa WHERE p_id=#{pId}
+    </delete>
+
+    <update id="updatePrograma" parameterType="xyz.askway.pojo.Programa" >
+        UPDATE programa
+        <trim prefix="set" suffixOverrides=",">
+            <if test="pName!=null">p_name=#{pName},</if>
+            <if test="pAlias!=null">p_alias=#{pAlias},</if>
+            <if test="pState!=null">p_state=#{pState},</if>
+        </trim>
+        WHERE p_id=#{pId}
+    </update>
+</mapper>
