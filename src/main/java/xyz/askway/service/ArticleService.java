@@ -37,10 +37,10 @@ public interface ArticleService {
     public void addArticle(Article article);
     /*
      * @Author Uncle Liu
-     * @Description //TODO 根据id删除Article
+     * @Description //TODO 根据条件删除Article
      * @Date 18:37 2018/10/30
      **/
-    public void deleteArticle(String aId);
+    public void deleteArticle(Article article);
     /*
      * @Author Uncle Liu
      * @Description //TODO 修改Article

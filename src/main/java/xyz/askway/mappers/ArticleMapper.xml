@@ -41,8 +41,9 @@
         </selectKey>
     </insert>
 
-    <delete id="deleteArticle" parameterType="String" >
-        DELETE FROM article WHERE a_id=#{aId}
+    <delete id="deleteArticle" parameterType="xyz.askway.pojo.Article" >
+        DELETE FROM article
+        <where>1=1 <if test="aId != null ">and a_id=#{aId} </if><if test="programa.pId != null" > and p_id=#{programa.pId} </if></where>
     </delete>
 
     <update id="updateArticle" parameterType="xyz.askway.pojo.Article">

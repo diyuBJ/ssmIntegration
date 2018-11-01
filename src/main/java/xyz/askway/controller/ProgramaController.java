@@ -3,10 +3,13 @@ package xyz.askway.controller;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import xyz.askway.pojo.Article;
 import xyz.askway.pojo.Programa;
+import xyz.askway.service.ArticleService;
 import xyz.askway.service.ProgramaService;
 
 import javax.annotation.Resource;
@@ -26,6 +29,8 @@ import java.util.List;
 public class ProgramaController {
     @Resource
     private ProgramaService programaService;
+    @Resource
+    private ArticleService articleService;
 
     @RequestMapping(value = "/selevtPrograma.do",produces="text/html;charset=UTF-8")
     @ResponseBody
@@ -35,17 +40,36 @@ public class ProgramaController {
         String data = JSONObject.toJSONString(programas);
         return data;
     }
+
+
     @RequestMapping(value = "/addPrograma.do")
     public void addPrograma(Programa programa){
         //添加栏目
         programaService.addPrograma(programa);
     }
+
+
     @RequestMapping(value = "/updatePrograma.do")
     public void updatePrograma(Programa programa){
         //修改栏目
-        System.out.println(programa+"*****************");
         programaService.updatePrograma(programa);
     }
+
+    @RequestMapping(value = "/delPrograma.do")
+    public void delPrograma(Programa programa){
+
+        System.out.println(programa+"先删文章*******************");
+        //先删文章
+        Article article = new Article();
+        article.setPrograma(programa);
+        articleService.deleteArticle(article);
+        //删除栏目
+        System.out.println(programa+"删除栏目*******************");
+
+        programaService.deletePrograma(programa.getPId());
+
+    }
+
 
     @RequestMapping(value = "/getProgramaById.do",produces="text/html;charset=UTF-8")
     @ResponseBody

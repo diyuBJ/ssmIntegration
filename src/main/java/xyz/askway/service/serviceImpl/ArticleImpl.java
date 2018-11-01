@@ -51,9 +51,13 @@ public class ArticleImpl implements ArticleService {
         articleDao.addArticle(article);
     }
 
-    @Override
-    public void deleteArticle(String aId) {
-        articleDao.deleteArticle(aId);
+    /*
+     * @Author Uncle Liu
+     * @Description //TODO 根据条件删除Article
+     * @Date 18:37 2018/10/30
+     **/
+    public void deleteArticle(Article article) {
+        articleDao.deleteArticle(article);
     }
 
     @Override

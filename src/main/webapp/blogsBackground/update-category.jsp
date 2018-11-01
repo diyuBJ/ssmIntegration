@@ -57,8 +57,10 @@
         $('#showDataForm1').find('input[type=text],select,input[type=hidden]').each(function() {
             $(this).val('');
         });
-        porgramaDate();
-        alert("修改栏目成功")
+        $("#tbo1");
+        layer.msg("修改栏目成功")
+        $("#main").html("");
+        $("#main").load("category.jsp");
         return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
     }
 </script>

@@ -38,12 +38,12 @@ public class ProgramaImpl implements ProgramaService {
     }
 
     @Override
-    public void deletePrograma(Integer pId) {
-        programaDao.deletePrograma(pId);
+    public int deletePrograma(Integer pId) {
+        return programaDao.deletePrograma(pId);
     }
 
     @Override
-    public void updatePrograma(Programa programa) {
-        programaDao.updatePrograma(programa);
+    public int updatePrograma(Programa programa) {
+        return programaDao.updatePrograma(programa);
     }
 }

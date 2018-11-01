@@ -33,12 +33,12 @@
         DELETE FROM programa WHERE p_id=#{pId}
     </delete>
 
-    <update id="updatePrograma" parameterType="xyz.askway.pojo.Programa">
+    <update id="updatePrograma" parameterType="xyz.askway.pojo.Programa" >
         UPDATE programa
         <trim prefix="set" suffixOverrides=",">
             <if test="pName!=null">p_name=#{pName},</if>
             <if test="pAlias!=null">p_alias=#{pAlias},</if>
-            <if test="pState!=null">,p_state=#{pState},</if>
+            <if test="pState!=null">p_state=#{pState},</if>
         </trim>
         WHERE p_id=#{pId}
     </update>

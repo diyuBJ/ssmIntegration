@@ -63,28 +63,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/admin-scripts.js"></script>
 <script>
-    //是否确认删除
-    $(function(){
-        $("#main table tbody tr td a").click(function(){
-            var name = $(this);
-            var id = name.attr("rel"); //对应id
-            if (event.srcElement.outerText === "删除")
-            {
-                if(window.confirm("此操作不可逆，是否确认？"))
-                {
-                    $.ajax({
-                        type: "POST",
-                        url: "/Category/delete",
-                        data: "id=" + id,
-                        cache: false, //不缓存此页面
-                        success: function (data) {
-                            window.location.reload();
-                        }
-                    });
-                };
-            };
-        });
-    });
+
 
     //导入页 面
     function loadscategory(url,id) {
@@ -106,11 +85,14 @@
             $(this).val('');
         });
         porgramaDate();
-        alert("添加栏目成功")
-        return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+        layer.msg("添加栏目成功")
+        $("#main").html("");
+        $("#main").load("category.jsp");
+        // return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
     }
 
     function porgramaDate(){
+        console.log("selevtPrograma1")
         //栏目数据
         $.ajax({
             url:"/selevtPrograma.do",
@@ -118,16 +100,56 @@
             data:{},
             dataType:"JSON",
             resultType:"JSON",
+            // cache:false,
+            async:false,
             success:function(data){
                 $("#tbo1").html("");
                 $("#sp1").html(data.length)
                 $.each(data,function(i,val){
-                    $("#tbo1").append("<tr><td>"+(i+1)+"</td><td>"+val.pName+"</td><td>"+val.pAlias+"</td><td>"+val.articleList.length+"</td><td><a href=\"#\" onclick=\"loadscategory('update-category.jsp','"+val.pId+"')\">修改</a> <a rel=\"1\">删除</a></td></tr>")
+                    $("#tbo1").append("<tr><td>"+(i+1)+"</td><td>"+val.pName+"</td><td>"+val.pAlias+"</td><td>"+val.articleList.length+"</td><td><a href=\"#\" onclick=\"loadscategory('update-category.jsp','"+val.pId+"')\">修改</a> <a href=\"#\" onclick=\"del("+val.pId+")\">删除</a></td></tr>")
                 })
             }
         })
+        console.log("selevtPrograma2")
     }
+    //绑数据
     porgramaDate();
+
+
+    //是否确认删除
+    function del(pid) {
+        layer.msg('您真的要删除此栏目吗？</br>栏目文章也会删掉哦！', {
+            time: 20000, //20s后自动关闭
+            anim:0, //窗体弹出的效果 0~6
+            btn: ['点错了', '确认删除'],
+            offset: [
+                150 //高(y)
+                ,600 //宽(x)
+            ],
+            btn1: function (index, layero) {
+                // alert("取消")
+                layer.close(index); //如果设定了yes或者btn1回调，需进行手工关闭
+            },
+            btn2: function(index, layero){
+                $.ajax({
+                    url:"/delPrograma.do",
+                    type:"post",
+                    data:{"pId":pid},
+                    dataType:"JSON",
+                    resultType:"JSON",
+                    success:function(data){
+
+                    }
+                })
+                console.log("删除")
+                layer.msg('删除成功');
+                porgramaDate();
+                $("#main").html("");
+                $("#main").load("category.jsp");
+
+            }
+        });
+    }
 </script>
 
 
