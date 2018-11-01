@@ -3,10 +3,14 @@ package xyz.askway.service.serviceImpl;
 import org.springframework.stereotype.Service;
 import xyz.askway.dao.AdministratorDAO_wml;
 import xyz.askway.pojo.Administrator;
+import xyz.askway.pojo.Log;
 import xyz.askway.service.AdministratorService_wml;
+import xyz.askway.util.Log4j2Controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * author:wlm
@@ -32,6 +36,63 @@ public class AdministratorServiceImp_wlm implements AdministratorService_wml {
         List<Administrator> queryList = adminDAO.query(administrator);
         if (queryList!=null && queryList.size()>0)
             return (E)adminDAO.query(administrator).get(0);
+        return null;
+    }
+
+
+    /**
+     * 2018/10/31 9:27
+     * #author:wlm
+     * #function:管理员登录日志
+     * #analysis:
+     */
+    @Override
+    public Integer logRecord(String administratorID, HttpServletRequest request) {
+        Log log = new Log();
+        log.setUId(administratorID);
+        String ip = request.getHeader("x-forwarded-for");
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("PRoxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        log.setLogIp(ip.equals("0:0:0:0:0:0:0:1")?"127.0.0.1":ip);
+        return adminDAO.logRecord(log);
+    }
+
+    /**
+     * 2018/10/31 10:16
+     * #author:wlm
+     * #function:管理员登录日志查询
+     * #analysis:
+     */
+    @Override
+    public List<Log> queryLog(Integer page,Integer record) {
+        try{
+            return adminDAO.queryLog(page,record);
+        }catch(Exception e){
+            Log4j2Controller.error("错误：execute Line 76 'return adminDAO.queryLog(page,record);' ERROR.");
+        }
+        return null;
+    }
+
+    /**
+     * 2018/11/1 9:22
+     * #author:wlm
+     * #function:统计日志的总记录数
+     * #analysis:
+     */
+    @Override
+    public Integer logStatisticsSum() {
+        try {
+            return Integer.parseInt(adminDAO.logStatisticsSum().get(0).get("sum").toString());
+        }catch(Exception e){
+            Log4j2Controller.error("错误：execute Line 92 'return Integer.parseInt(adminDAO.logStatisticsSum().get(0).get(\"sum\").toString())' ERROR.");
+        }
         return null;
     }
 }

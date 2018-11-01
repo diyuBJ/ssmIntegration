@@ -3,6 +3,7 @@
 <!-- 管理员mapper -->
 <mapper namespace="xyz.askway.dao.AdministratorDAO_wml">
 
+    <!-- 管理员结果集映射 -->
     <resultMap id="administrator" type="xyz.askway.pojo.Administrator">
         <id property="uId" column="u_id"/>
         <result property="uName" column="u_name"/>
@@ -28,6 +29,34 @@
             </if>
         </if>
     </select>
+
+
+    <select id="queryAll" resultMap="administrator">
+         select * from administrator
+    </select>
+
+    <!-- 管理员登录日志结果集映射 -->
+    <resultMap id="log" type="xyz.askway.pojo.Log">
+        <id property="logId" column="log_id"/>
+        <result property="uId" column="u_id"/>
+        <result property="logIp" column="log_ip"/>
+        <result property="logTime" column="log_time"/>
+        <association property="administrator" column="u_id" javaType="xyz.askway.pojo.Administrator" select="xyz.askway.dao.AdministratorDAO_wml.queryAll"/>
+    </resultMap>
+    <!-- 管理员登录日志查询 -->
+    <select id="queryLog" resultMap="log">
+        SELECT * FROM log  ORDER BY log_time DESC LIMIT ${page},${record}
+    </select>
+
+    <!--获得日志总记录数-->
+    <select id="logStatisticsSum" resultType="java.util.HashMap">
+        SELECT COUNT(*)as sum FROM log
+    </select>
+
+    <!--管理员登录log-->
+    <insert id="logRecord">
+        insert into log values (null,#{log.uId},#{log.logIp},null)
+    </insert>
 
 
 </mapper>
