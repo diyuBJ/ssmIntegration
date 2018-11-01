@@ -92,7 +92,6 @@
     }
 
     function porgramaDate(){
-        console.log("selevtPrograma1")
         //栏目数据
         $.ajax({
             url:"/selevtPrograma.do",
@@ -101,7 +100,7 @@
             dataType:"JSON",
             resultType:"JSON",
             // cache:false,
-            async:false,
+            async:true,
             success:function(data){
                 $("#tbo1").html("");
                 $("#sp1").html(data.length)
@@ -110,7 +109,6 @@
                 })
             }
         })
-        console.log("selevtPrograma2")
     }
     //绑数据
     porgramaDate();

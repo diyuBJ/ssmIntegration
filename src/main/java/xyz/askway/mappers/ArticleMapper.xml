@@ -34,11 +34,8 @@
         from  article where a_title like #{text} or label like #{text} ORDER BY a_time desc
      </select>
     <!--增加-->
-    <insert id="addArticle" parameterType="xyz.askway.pojo.Article" keyProperty="aId" useGeneratedKeys="true" keyColumn="a_id" >
-    insert into article(a_id,a_title,a_content,a_title_img,a_time,a_reading_quantity,a_commentnum,p_id,l_id,a_status_bar,u_id) values(#{aId},#{aTitle},#{aContent},#{aTitleImg},#{aTime},#{aReadingQuantity},#{aCommentnum},#{programa.pId},#{label.lId},#{aStatusBar},#{administrator.uId})
-        <selectKey keyProperty="aId" resultType="String" order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+    <insert id="addArticle" parameterType="xyz.askway.pojo.Article" >
+    insert into article(a_id,a_title,a_content,a_title_img,a_time,p_id,label,a_status_bar,u_id) values(#{aId},#{aTitle},#{aContent},#{aTitleImg},#{aTime},#{programa.pId},#{label},#{aStatusBar},#{administrator.uId})
     </insert>
 
     <delete id="deleteArticle" parameterType="xyz.askway.pojo.Article" >
