@@ -59,13 +59,7 @@
                         <li><a  href="#" id="exit" >退出登录</a></li>
                         <li><a data-toggle="modal" data-target="#WeChat">帮助</a></li>
                     </ul>
-                    <form action="" method="post" class="navbar-form navbar-right" role="search">
-                        <div class="input-group">
-                            <input type="text" class="form-control" autocomplete="off" placeholder="键入关键字搜索" maxlength="15">
-                            <span class="input-group-btn">
-              <button class="btn btn-default" type="submit">搜索</button>
-              </span> </div>
-                    </form>
+
                 </div>
             </div>
         </nav>
@@ -76,7 +70,8 @@
                 <li ><a href="#" onclick="loads('top.jsp')">报告</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="#" onclick="loads('article.jsp')">文章</a></li>
+                <%--<li><a href="#" onclick="loads('article.jsp')">文章</a></li>--%>
+                <li><a href="#" onclick="loads('/getArticle.do')">文章</a></li>
 
                 <li><a href="#" onclick="loads('notice.jsp')">公告</a></li>
             </ul>

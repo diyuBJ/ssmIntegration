@@ -55,11 +55,11 @@
                             <h2 class="add-article-box-title"><span>发布</span></h2>
                             <div class="add-article-box-content">
                                 <p><label>状态：</label><span class="article-status-display">未发布</span></p>
-                                <p><label>公开度：</label><input type="radio" name="aStatusBar" id="aStatusBar1" value="0" checked/>公开 <input type="radio" name="aStatusBar" id="aStatusBar2" value="1" />加密</p>
+                                <p><label>公开度：</label><input type="radio" name="aStatusBar" id="aStatusBar1" value="1" checked/>公开 <input type="radio" name="aStatusBar" id="aStatusBar2" value="0" />加密</p>
                                 <%--<p><label>发布于：</label><span class="article-time-display"><input style="border: none;" type="datetime" name="aStatusBar" value="2016-01-09 17:29:37" /></span></p>--%>
                             </div>
                             <div class="add-article-box-footer">
-                                <button class="btn btn-primary" type="submit" name="submit" onclick="aaa()">发布</button>
+                                <button class="btn btn-primary" type="submit" name="submit" >发布</button>
                             </div>
                         </div>
                     </div>
@@ -67,6 +67,21 @@
             </div>
 
 <script>
+    //失去焦点事件
+    $("#aTitle").blur(function(){
+        var value=$(this).val();
+        if(value.length>50){
+            $(this).val("");
+            layer.msg('标题只能是长度50个字符');
+        }
+    });
+    $("#label").blur(function(){
+        var value=$(this).val();
+        if(value.length>50){
+            $(this).val("");
+            layer.msg('标签只能是长度50个字符');
+        }
+    });
     //标题图片地址
     var img="";
     // 编辑器
@@ -113,28 +128,26 @@
     function saveArticle() {
         var aStatusBar = $("input[name='aStatusBar']:checked").val();
         var pId = $("input[name='programa.pId']:checked").val();
+        var title=$("#aTitle").val();
+        var label=$("#label").val();
         if (p_desc.getData()=="") {
             layer.msg("内容不能为空");
             return false;
         }
         $.ajax({
             type: "POST",
-            // encType:"multipart/form-data",
             url: "/addArticle.do",
-            data : {"aTitle":$("#aTitle").val(),"aContent":p_desc.getData(),"aTitleImg":img,"label":$("#label").val(),"aStatusBar":aStatusBar,"programa.pId":pId},
-            dataType:"JSON",
-            resultType:"JSON",
+            data : {"aTitle":title,"aContent":p_desc.getData(),"aTitleImg":img,"label":label,"aStatusBar":aStatusBar,"programa.pId":pId},
             success: function(data) {
             }
         });
         $('#addArticleForm').find('input[type=text],select,input[type=hidden]').each(function() {
             $(this).val('');
         });
-        // porgramaDate();
         layer.msg("添加文章成功")
         $("#main").html("");
         $("#main").load("article.jsp");
-        // return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+        return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
     }
 
     //栏目数据

@@ -37,12 +37,9 @@
     </form>
     <c:if test="${sessionScope.comeToNothing!=null}">
         <script type="text/javascript">
-            // layer.msg('账号或者密码错误！', function(){
-            //     //关闭后的操作
-            // });
             layer.msg('账号或者密码错误！', {
                 time: 2000, //20s后自动关闭
-                anim:6, //窗体弹出的效果 0~6
+                anim:0, //窗体弹出的效果 0~6
                 offset: [
                     '25%' //高(y)
                     ,'37%' //宽(x)

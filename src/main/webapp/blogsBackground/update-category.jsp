@@ -23,6 +23,21 @@
                 <button class="btn btn-primary" type="submit" name="submit">更新</button>
             </form>
 <script>
+    $("#pName").blur(function(){
+        var value=$(this).val();
+        if(value.length>18){
+            $(this).val("");
+            layer.msg('栏目名称只能输入18个字符');
+        }
+    });
+    $("#pAlias").blur(function(){
+        var value=$(this).val();
+        var regex = /^[a-zA-Z0-9][\w-]{1,18}$/g;
+        if(!regex.test(value)){
+            $(this).val("");
+            layer.msg('长度18个字符,只能包含字母,数字和连字符（-）');
+        }
+    });
     $.ajax({
         type: "POST",
         url: "/getProgramaById.do",
@@ -49,18 +64,16 @@
             type: "POST",
             url: "/updatePrograma.do",
             data : $('#showDataForm1').serializeArray(),
-            dataType:"JSON",
-            resultType:"JSON",
+            async:true,
             success: function(data) {
+                $('#showDataForm1').find('input[type=text],select,input[type=hidden]').each(function() {
+                    $(this).val('');
+                });
+                layer.msg("修改栏目成功")
+                $("#main").html("");
+                $("#main").load("category.jsp");
             }
         });
-        $('#showDataForm1').find('input[type=text],select,input[type=hidden]').each(function() {
-            $(this).val('');
-        });
-        $("#tbo1");
-        layer.msg("修改栏目成功")
-        $("#main").html("");
-        $("#main").load("category.jsp");
         return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
     }
 </script>

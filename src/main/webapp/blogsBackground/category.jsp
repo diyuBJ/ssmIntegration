@@ -63,7 +63,23 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/admin-scripts.js"></script>
 <script>
-
+    //失去焦点事件
+    $("#category-name").blur(function(){
+        var value=$(this).val();
+        if(value.length>18){
+            $(this).val("");
+            layer.msg('栏目名称只能输入18个字符');
+        }
+    });
+    //失去焦点事件
+    $("#category-alias").blur(function(){
+        var value=$(this).val();
+        var regex = /^[a-zA-Z0-9][\w-]{1,18}$/g;
+        if(!regex.test(value)){
+            $(this).val("");
+            layer.msg('长度18个字符,只能包含字母,数字和连字符（-）');
+        }
+    });
 
     //导入页 面
     function loadscategory(url,id) {
@@ -76,19 +92,17 @@
             type: "POST",
             url: "/addPrograma.do",
             data : $('#showDataForm').serializeArray(),
-            dataType:"JSON",
-            resultType:"JSON",
+            async:true,
             success: function(data) {
+                $('#showDataForm').find('input[type=text],select,input[type=hidden]').each(function() {
+                    $(this).val('');
+                });
+                layer.msg("添加栏目成功")
+                $("#main").html("");
+                $("#main").load("category.jsp");
             }
         });
-        $('#showDataForm').find('input[type=text],select,input[type=hidden]').each(function() {
-            $(this).val('');
-        });
-        porgramaDate();
-        layer.msg("添加栏目成功")
-        $("#main").html("");
-        $("#main").load("category.jsp");
-        // return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
+        return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
     }
 
     function porgramaDate(){
@@ -133,18 +147,13 @@
                     url:"/delPrograma.do",
                     type:"post",
                     data:{"pId":pid},
-                    dataType:"JSON",
-                    resultType:"JSON",
+                    async:true,
                     success:function(data){
-
+                        layer.msg('删除成功');
+                        $("#main").html("");
+                        $("#main").load("category.jsp");
                     }
                 })
-                console.log("删除")
-                layer.msg('删除成功');
-                porgramaDate();
-                $("#main").html("");
-                $("#main").load("category.jsp");
-
             }
         });
     }
