@@ -38,7 +38,7 @@ public interface AdministratorService_wml {
      * #function:管理员登录日志查询
      * #analysis:
      */
-    List<Log> queryLog(Integer page,Integer record);
+    List<Log> queryLog(Integer page, Integer record);
 
     /**
      * 2018/11/1 9:21
@@ -47,13 +47,5 @@ public interface AdministratorService_wml {
      * #analysis:
      */
     Integer logStatisticsSum();
-
-    /**
-     * 2018/11/1 15:02
-     * #author:wlm
-     * #function:删除管理员登录日志
-     * #analysis:
-     */
-    Integer deleteLogs(Map<String,Object> LogID);
 
 }

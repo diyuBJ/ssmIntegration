@@ -58,20 +58,5 @@
         insert into log values (null,#{log.uId},#{log.logIp},null)
     </insert>
 
-    <!-- 删除管理员登录日志-->
-    <delete id="deleteLogs">
-        delete from log where 1=1
-         <if test="logID!=null">
-
-             <if test="logID.tj!=null">
-                  and u_id =#{logID.id}
-             </if>
-
-             <if test="logID.tj==null and logID.id!=null">
-                 and log_id =${logID.id}
-             </if>
-
-         </if>
-    </delete>
 
 </mapper>

@@ -1,12 +1,17 @@
 package xyz.askway.service.serviceImpl;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import xyz.askway.dao.ArticleDao;
 import xyz.askway.pojo.Article;
 import xyz.askway.service.ArticleService;
+import xyz.askway.util.Log4j2Controller;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Uncle Liu
@@ -20,10 +25,27 @@ public class ArticleImpl implements ArticleService {
     private ArticleDao articleDao;
 
     @Override
-    public List<Article> selectArticle() {
-        return articleDao.selectArticle();
+    public List<Article> selectArticle(@Param("criteria")String criteria,@Param("page") Integer page, @Param("record")Integer record) {
+        try{
+            return articleDao.selectArticle(criteria,page==0?0:(page-1)*record,record);
+        }catch(Exception e){
+            Log4j2Controller.error("错误：execute Line 30 'return articleDao.selectArticle(criteria，page,record);' ERROR.");
+        }
+        return null;
     }
-
+    /*
+     * @Author Uncle Liu
+     * @Description //TODO 统计文章总记录数
+     * @Date 14:41 2018/11/1
+     **/
+    public Integer articleStatisticsSum(){
+        try {
+            return Integer.parseInt(articleDao.articleStatisticsSum().get(0).get("sum").toString());
+        }catch(Exception e){
+            Log4j2Controller.error("错误：execute Line 41 'return Integer.parseInt(articleDao.articleStatisticsSum().get(0).get(\"sum\").toString())' ERROR.");
+        }
+        return null;
+    }
     @Override
     public Article getArticleById(String aId) {
         return articleDao.getArticleById(aId);
@@ -56,8 +78,16 @@ public class ArticleImpl implements ArticleService {
      * @Description //TODO 根据条件删除Article
      * @Date 18:37 2018/10/30
      **/
-    public void deleteArticle(Article article) {
-        articleDao.deleteArticle(article);
+    @Transactional(propagation = Propagation.REQUIRED)
+    public int deleteArticle(Article article) {
+        int i=0;
+        try {
+            i=articleDao.deleteArticle(article);
+        }catch (Exception e){
+            e.printStackTrace();
+            Log4j2Controller.error(e.getMessage());
+        }
+        return i;
     }
 
     @Override

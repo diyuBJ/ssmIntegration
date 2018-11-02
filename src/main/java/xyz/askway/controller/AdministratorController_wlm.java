@@ -16,9 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * author:wlm
@@ -28,12 +26,7 @@ import java.util.Map;
  */
 @Controller
 public class AdministratorController_wlm {
-    private static Integer curr=0;
-    private Integer limit=0;
 
-    public static void setCurr(Integer curr){
-         AdministratorController_wlm.curr=curr;
-    }
     @Resource
     private AdministratorService_wml adms; //管理员service接口对象
 
@@ -114,41 +107,9 @@ public class AdministratorController_wlm {
      */
     @RequestMapping("trackmod")
     public void TRACKMOD(HttpServletResponse response,Integer curr,Integer limit) throws IOException {
-        AdministratorController_wlm.curr=curr;
-        this.limit=limit;
         PrintWriter writer = response.getWriter();
         //SerializerFeature.DisableCircularReferenceDetect:fastjson把对象转化成json避免$ref
         writer.write(JSONObject.toJSONString(adms.queryLog(curr, limit),SerializerFeature.DisableCircularReferenceDetect));
-        writer.flush();
-        writer.close();
-    }
-
-    /**
-     * 2018/11/1 14:41
-     * #author:wlm
-     * #function:删除管理员登录日志
-     * #analysis:
-     */
-    @RequestMapping("deleteLog")
-    public void deleteLog(HttpServletResponse response,String id,Integer tj) throws IOException {
-        PrintWriter writer = response.getWriter();
-        Map<String,Object> map= new HashMap<String,Object>();
-        if(tj==null){
-            Map<String,Object> m=new HashMap<String, Object>();
-            m.put("id",id);
-            adms.deleteLogs(m);
-        }else if (id!=null && !id.equals("")){
-            Map<String,Object> m=new HashMap<String, Object>();
-            m.put("id",id);
-            m.put("tj",tj);
-
-            adms.deleteLogs(m);
-        }else
-            adms.deleteLogs(null);
-        map.put("logSum",adms.logStatisticsSum());
-        map.put("logs",adms.queryLog(curr, limit));
-        map.put("refreshs",AdministratorController_wlm.curr);
-        writer.write(JSONObject.toJSONString(map,SerializerFeature.DisableCircularReferenceDetect));
         writer.flush();
         writer.close();
     }

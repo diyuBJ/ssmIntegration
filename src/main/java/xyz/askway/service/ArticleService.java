@@ -1,50 +1,58 @@
 package xyz.askway.service;
 
+import org.apache.ibatis.annotations.Param;
 import xyz.askway.pojo.Article;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ArticleService {
     /*
      * @Author Uncle Liu
-     * @Description //TODO 查询所有Article
+     * @Description //TODO 分页查询Article
      * @Date 18:36 2018/10/30
      **/
-    public List<Article> selectArticle();
+    List<Article> selectArticle(@Param("criteria") String criteria, @Param("page") Integer page, @Param("record") Integer record);
+    /*
+     * @Author Uncle Liu
+     * @Description //TODO 统计文章总记录数
+     * @Date 14:41 2018/11/1
+     **/
+    Integer articleStatisticsSum();
     /*
      * @Author Uncle Liu
      * @Description //TODO 根据id查询Article
      * @Date 18:36 2018/10/30
      **/
-    public Article getArticleById(String aId);
+    Article getArticleById(String aId);
     /*
      * @Author Uncle Liu
      * @Description //TODO 根据栏目id查询Article
      * @Date 18:36 2018/10/30
      **/
-    public List<Article> getArticleByProgramaId(String pId);
+    List<Article> getArticleByProgramaId(String pId);
     /*
      * @Author Uncle Liu
      * @Description //TODO 模糊查询（标题或者标签）
      * @Date 18:36 2018/10/30
      **/
-    public List<Article> getArticleLike(String text);
+    List<Article> getArticleLike(String text);
     /*
      * @Author Uncle Liu
      * @Description //TODO 添加Article
      * @Date 18:37 2018/10/30
      **/
-    public void addArticle(Article article);
+    void addArticle(Article article);
     /*
      * @Author Uncle Liu
      * @Description //TODO 根据条件删除Article
      * @Date 18:37 2018/10/30
      **/
-    public void deleteArticle(Article article);
+    int deleteArticle(Article article);
     /*
      * @Author Uncle Liu
      * @Description //TODO 修改Article
      * @Date 18:37 2018/10/30
      **/
-    public void updateArticle(Article article);
+    void updateArticle(Article article);
 }

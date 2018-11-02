@@ -10,35 +10,35 @@ public interface ProgramaService {
      * @Description //TODO 查询所有Programa
      * @Date 18:36 2018/10/30
      **/
-    public List<Programa> selectPrograma();
+    List<Programa> selectPrograma();
     /*
      * @Author Uncle Liu
      * @Description //TODO 根据id查询Programa
      * @Date 18:36 2018/10/30
      **/
-    public Programa getProgramaById(Integer pId);
+    Programa getProgramaById(Integer pId);
     /*
      * @Author Uncle Liu
      * @Description //TODO 根据id查询Programa
      * @Date 18:36 2018/10/30
      **/
-    public Programa getProgramaById1(Integer pId);
+    Programa getProgramaById1(Integer pId);
     /*
      * @Author Uncle Liu
      * @Description //TODO 添加Programa
      * @Date 18:37 2018/10/30
      **/
-    public void addPrograma(Programa programa);
+    void addPrograma(Programa programa);
     /*
      * @Author Uncle Liu
      * @Description //TODO 根据id删除Programa
      * @Date 18:37 2018/10/30
      **/
-    public int deletePrograma(Integer pId);
+    int deletePrograma(Integer pId);
     /*
      * @Author Uncle Liu
      * @Description //TODO 修改Programa
      * @Date 18:37 2018/10/30
      **/
-    public int updatePrograma(Programa programa);
+    int updatePrograma(Programa programa);
 }

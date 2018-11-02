@@ -29,7 +29,7 @@ public class ProgramaImpl implements ProgramaService {
     }
     @Override
     public Programa getProgramaById1(Integer pId) {
-        return programaDao.getProgramaById(pId);
+        return programaDao.getProgramaById1(pId);
     }
 
     @Override

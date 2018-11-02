@@ -43,30 +43,32 @@ public class ProgramaController {
 
 
     @RequestMapping(value = "/addPrograma.do")
-    public void addPrograma(Programa programa){
+    @ResponseBody
+    public String addPrograma(Programa programa){
         //添加栏目
         programaService.addPrograma(programa);
+        return "add";
     }
 
 
     @RequestMapping(value = "/updatePrograma.do")
-    public void updatePrograma(Programa programa){
+    @ResponseBody
+    public String updatePrograma(Programa programa){
         //修改栏目
         programaService.updatePrograma(programa);
+        return "update";
     }
 
     @RequestMapping(value = "/delPrograma.do")
-    public void delPrograma(Programa programa){
-
-        System.out.println(programa+"先删文章*******************");
+    @ResponseBody
+    public String delPrograma(Programa programa){
         //先删文章
         Article article = new Article();
         article.setPrograma(programa);
         articleService.deleteArticle(article);
         //删除栏目
-        System.out.println(programa+"删除栏目*******************");
-
         programaService.deletePrograma(programa.getPId());
+        return "del";
 
     }
 

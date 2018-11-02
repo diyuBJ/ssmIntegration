@@ -1,7 +1,6 @@
 package xyz.askway.service.serviceImpl;
 
 import org.springframework.stereotype.Service;
-import xyz.askway.controller.AdministratorController_wlm;
 import xyz.askway.dao.AdministratorDAO_wml;
 import xyz.askway.pojo.Administrator;
 import xyz.askway.pojo.Log;
@@ -74,9 +73,7 @@ public class AdministratorServiceImp_wlm implements AdministratorService_wml {
     @Override
     public List<Log> queryLog(Integer page,Integer record) {
         try{
-            List<Log> logs = adminDAO.queryLog(page == 0 ? 0 : (page - 1) * record, record);
-            if (logs.size()<1) AdministratorController_wlm.setCurr(0);
-            return logs.size()<1 ?adminDAO.queryLog(0, record) : logs;
+            return adminDAO.queryLog(page==0?0:(page-1)*record,record);
         }catch(Exception e){
             Log4j2Controller.error("错误：execute Line 76 'return adminDAO.queryLog(page,record);' ERROR.");
         }
@@ -97,17 +94,5 @@ public class AdministratorServiceImp_wlm implements AdministratorService_wml {
             Log4j2Controller.error("错误：execute Line 92 'return Integer.parseInt(adminDAO.logStatisticsSum().get(0).get(\"sum\").toString())' ERROR.");
         }
         return null;
-    }
-
-    /**
-     * 2018/11/1 15:06
-     * #author:wlm
-     * #function:删除管理员登录日志
-     * #analysis:
-     */
-    @Override
-    public Integer deleteLogs(Map<String,Object> LogID) {
-
-        return adminDAO.deleteLogs(LogID);
     }
 }
