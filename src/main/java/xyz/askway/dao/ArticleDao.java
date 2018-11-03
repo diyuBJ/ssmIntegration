@@ -18,7 +18,7 @@ public interface ArticleDao {
      * @Description //TODO 统计文章总记录数
      * @Date 14:41 2018/11/1
      **/
-    List<Map<String,Object>> articleStatisticsSum();
+    List<Map<String,Object>> articleStatisticsSum(@Param("criteria") String criteria);
     /*
      * @Author Uncle Liu
      * @Description //TODO 根据id查询Article

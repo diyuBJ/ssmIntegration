@@ -21,7 +21,7 @@
      </select>
     <!--获得文章总记录数-->
     <select id="articleStatisticsSum" resultType="java.util.HashMap">
-        SELECT COUNT(*)as sum FROM article
+        SELECT COUNT(*)as sum FROM article WHERE u_id=#{criteria} OR p_id=#{criteria} OR label LIKE '%${criteria}%' OR a_content LIKE '%${criteria}%' OR a_title LIKE '%${criteria}%'
     </select>
     <!--根据id查询-->
      <select id="getArticleById" parameterType="String" resultMap="articleMapper">

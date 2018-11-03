@@ -18,7 +18,7 @@ public interface ArticleService {
      * @Description //TODO 统计文章总记录数
      * @Date 14:41 2018/11/1
      **/
-    Integer articleStatisticsSum();
+    Integer articleStatisticsSum(@Param("criteria") String criteria);
     /*
      * @Author Uncle Liu
      * @Description //TODO 根据id查询Article

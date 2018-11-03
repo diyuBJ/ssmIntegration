@@ -38,9 +38,9 @@ public class ArticleImpl implements ArticleService {
      * @Description //TODO 统计文章总记录数
      * @Date 14:41 2018/11/1
      **/
-    public Integer articleStatisticsSum(){
+    public Integer articleStatisticsSum(@Param("criteria") String criteria){
         try {
-            return Integer.parseInt(articleDao.articleStatisticsSum().get(0).get("sum").toString());
+            return Integer.parseInt(articleDao.articleStatisticsSum(criteria).get(0).get("sum").toString());
         }catch(Exception e){
             Log4j2Controller.error("错误：execute Line 41 'return Integer.parseInt(articleDao.articleStatisticsSum().get(0).get(\"sum\").toString())' ERROR.");
         }
