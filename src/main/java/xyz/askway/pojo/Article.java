@@ -1,5 +1,9 @@
 package xyz.askway.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+
+import java.beans.Transient;
 import java.io.Serializable;
 
 /**
@@ -21,13 +25,14 @@ public class Article implements Serializable{
 	private String label;//标签
 	private Administrator administrator;//管理员id 外键
 	private Integer aStatusBar; 	//状态 0不公开 1公开
+	private String aAbstract;//摘要
 	/**
 	 * @Description: TODO(无参构造方法) 
 	 */ 
 	public Article(){
 	}
 
-	public Article(String aId, String aTitle, String aContent, String aTitleImg, String aTime, Integer aReadingQuantity, Integer aCommentnum, String label, Integer aStatusBar) {
+	public Article(String aId, String aTitle, String aContent, String aTitleImg, String aTime, Integer aReadingQuantity, Integer aCommentnum, String label, Integer aStatusBar, String aAbstract) {
 		this.aId = aId;
 		this.aTitle = aTitle;
 		this.aContent = aContent;
@@ -37,6 +42,7 @@ public class Article implements Serializable{
 		this.aCommentnum = aCommentnum;
 		this.label = label;
 		this.aStatusBar = aStatusBar;
+		this.aAbstract = aAbstract;
 	}
 
 	/**
@@ -193,6 +199,14 @@ public class Article implements Serializable{
 		this.administrator = administrator;
 	}
 
+	public String getaAbstract() {
+		return aAbstract;
+	}
+
+	public void setaAbstract(String aAbstract) {
+		this.aAbstract = aAbstract;
+	}
+
 	@Override
 	public String toString() {
 		return "Article{" +
@@ -205,6 +219,7 @@ public class Article implements Serializable{
 				", aCommentnum=" + aCommentnum +
 				", label='" + label + '\'' +
 				", aStatusBar=" + aStatusBar +
+				", aAbstract='" + aAbstract + '\'' +
 				'}';
 	}
 }

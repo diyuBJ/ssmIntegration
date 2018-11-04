@@ -51,19 +51,14 @@
                         </ul>
                     </li>
                 </ul>
-                <a href="javascript:;" class="login" rel="nofollow">Hi,请登录</a>&nbsp;&nbsp;<a href="javascript:;" class="register" rel="nofollow">我要注册</a>&nbsp;&nbsp;<a href="" rel="nofollow">找回密码</a> </div>
+                &nbsp;&nbsp;
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
                 <h1 class="logo hvr-bounce-in"><a href="" title=""><img src="images/log.png" alt=""></a></h1>
             </div>
             <div class="collapse navbar-collapse" id="header-navbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden-index active"><a data-cont="异清轩首页" href="index.jsp">异清轩首页</a></li>
-                    <li><a href="category.jsp">前端技术</a></li>
-                    <li><a href="category.jsp">后端程序</a></li>
-                    <li><a href="category.jsp">管理系统</a></li>
-                    <li><a href="category.jsp">授人以渔</a></li>
-                    <li><a href="category.jsp">程序人生</a></li>
+                <ul class="nav navbar-nav navbar-right" id="tul">
+
                 </ul>
                 <form class="navbar-form visible-xs" action="/Search" method="post">
                     <div class="input-group">
@@ -80,62 +75,13 @@
     <div class="content-wrap">
         <div class="content">
             <div class="title">
-                <h3>后端程序</h3>
+                <h3 id="pName"></h3>
             </div>
-            <article class="excerpt excerpt-1"><a class="focus" href="article.jsp" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-                <header><a class="cat" href="program">后端程序<i></i></a>
-                    <h2><a href="article.jsp" title="">php如何判断一个日期的格式是否正确</a></h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.jsp#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-                <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-            </article>
-            <article class="excerpt excerpt-2"><a class="focus" href="article.jsp" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-                <header><a class="cat" href="program">后端程序<i></i></a>
-                    <h2><a href="article.jsp" title="">php如何判断一个日期的格式是否正确</a></h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.jsp#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-                <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-            </article>
-            <article class="excerpt excerpt-3"><a class="focus" href="article.jsp" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-                <header><a class="cat" href="program">后端程序<i></i></a>
-                    <h2><a href="article.jsp" title="">php如何判断一个日期的格式是否正确</a></h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.jsp#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-                <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-            </article>
-            <article class="excerpt excerpt-4"><a class="focus" href="article.jsp" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-                <header><a class="cat" href="program">后端程序<i></i></a>
-                    <h2><a href="article.jsp" title="">php如何判断一个日期的格式是否正确</a></h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.jsp#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-                <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-            </article>
-            <article class="excerpt excerpt-5"><a class="focus" href="article.jsp" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-                <header><a class="cat" href="program">后端程序<i></i></a>
-                    <h2><a href="article.jsp" title="">php如何判断一个日期的格式是否正确</a></h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.jsp#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-                <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-            </article>
-            <nav class="pagination" style="display: none;">
-                <ul>
-                    <li class="prev-page"></li>
-                    <li class="active"><span>1</span></li>
-                    <li><a href="?page=2">2</a></li>
-                    <li class="next-page"><a href="?page=2">下一页</a></li>
-                    <li><span>共 2 页</span></li>
-                </ul>
-            </nav>
+            <div id="contents">
+            </div>
+            <div style="text-align:center" id="aa">
+                <a  href="javascript:category_query();" > 点击加载更多</a>
+            </div>
         </div>
     </div>
     <aside class="sidebar">
@@ -172,7 +118,7 @@
 </section>
 <footer class="footer">
     <div class="container">
-        <p>&copy; 2016 <a href="">ylsat.com</a> &nbsp; <a href="#" target="_blank" rel="nofollow">豫ICP备20151109-1</a> &nbsp; &nbsp; <a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+        <p>&copy; 2016 <a href="">ylsat.com</a> &nbsp; <a href="#" target="_blank" rel="nofollow">豫ICP备20151109-1</a> &nbsp; &nbsp; <a href="http://www.baidu.com/" target="_blank">博客</a></p>
     </div>
     <div id="gotop"><a class="gotop"></a></div>
 </footer>
@@ -218,5 +164,8 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.ias.js"></script>
 <script src="js/scripts.js"></script>
+<script src="js/category.js"></script>
+
+
 </body>
 </html>

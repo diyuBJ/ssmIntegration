@@ -53,20 +53,14 @@
                         </ul>
                     </li>
                 </ul>
-                <a data-toggle="modal" data-target="#loginModal" class="login" rel="nofollow">Hi,请登录</a>&nbsp;&nbsp;<a href="javascript:;" class="register" rel="nofollow">我要注册</a>&nbsp;&nbsp;<a href="" rel="nofollow">找回密码</a> </div>
+                &nbsp;&nbsp;
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
                 <h1 class="logo hvr-bounce-in"><a href="" title=""><img src="images/log.png" alt=""></a></h1>
             </div>
             <div class="collapse navbar-collapse" id="header-navbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden-index active"><a data-cont="异清轩首页" href="index.jsp">异清轩首页</a></li>
-                    <li><a href="category.jsp">前端技术</a></li>
-                    <li><a href="category.jsp">后端程序</a></li>
-                    <li><a href="category.jsp">管理系统</a></li>
-                    <li><a href="category.jsp">授人以渔</a></li>
-                    <li><a href="category.jsp">程序人生</a></li>
-                    <li><a href="/add.do">測試</a></li>
+                <ul class="nav navbar-nav navbar-right" id="tul">
+                    <li class="hidden-index active"><a data-cont="首页" href="index.jsp">首页</a></li>
                 </ul>
                 <form class="navbar-form visible-xs" action="/Search" method="post">
                     <div class="input-group">
@@ -110,54 +104,12 @@
             </article>
             <div class="title">
                 <h3>最新发布</h3>
-                <%--<div class="more"><a href="">PHP</a><a href="">JavaScript</a><a href="">EmpireCMS</a><a href="">Apache</a><a href="">MySQL</a></div>--%>
             </div>
-            <article class="excerpt excerpt-1"><a class="focus" href="article.jsp" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-                <header><a class="cat" href="program">后端程序<i></i></a>
-                    <h2><a href="article.jsp" title="">php如何判断一个日期的格式是否正确</a></h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.jsp#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-                <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-            </article>
-            <article class="excerpt excerpt-2"><a class="focus" href="article.jsp" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-                <header><a class="cat" href="program">后端程序<i></i></a>
-                    <h2><a href="article.jsp" title="">php如何判断一个日期的格式是否正确</a></h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.jsp#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-                <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-            </article>
-            <article class="excerpt excerpt-3"><a class="focus" href="article.jsp" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-                <header><a class="cat" href="program">后端程序<i></i></a>
-                    <h2><a href="article.jsp" title="">php如何判断一个日期的格式是否正确</a></h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.jsp#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-                <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-            </article>
-            <article class="excerpt excerpt-4"><a class="focus" href="article.jsp" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-                <header><a class="cat" href="program">后端程序<i></i></a>
-                    <h2><a href="article.jsp" title="">php如何判断一个日期的格式是否正确</a></h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.jsp#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-                <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-            </article>
-            <article class="excerpt excerpt-5"><a class="focus" href="article.jsp" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
-                <header><a class="cat" href="program">后端程序<i></i></a>
-                    <h2><a href="article.jsp" title="">php如何判断一个日期的格式是否正确</a></h2>
-                </header>
-                <p class="meta">
-                    <time class="time"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.jsp#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
-                <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
-            </article>
-            <a href="javascript:index_query();" >点击加载更多</a>
+            <div id="contents">
+            </div>
+            <div style="text-align:center" id="aa">
+                <a  href="javascript:index_query();" > 点击加载更多</a>
+            </div>
         </div>
     </div>
     <aside class="sidebar">
@@ -165,7 +117,6 @@
             <div class="widget widget-tabs">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#notice" aria-controls="notice" role="tab" data-toggle="tab">网站公告</a></li>
-                    <li role="presentation"><a href="#centre" aria-controls="centre" role="tab" data-toggle="tab">会员中心</a></li>
                     <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">联系站长</a></li>
                 </ul>
                 <div class="tab-content">
@@ -182,13 +133,9 @@
                                 <a target="_blank" href="">在这个小工具中最多可以调用五条</a></li>
                         </ul>
                     </div>
-                    <div role="tabpanel" class="tab-pane centre" id="centre">
-                        <h4>需要登录才能进入会员中心</h4>
-                        <p> <a data-toggle="modal" data-target="#loginModal" class="btn btn-primary">立即登录</a> <a href="javascript:;" class="btn btn-default">现在注册</a> </p>
-                    </div>
                     <div role="tabpanel" class="tab-pane contact" id="contact">
                         <h2>Email:<br />
-                            <a href="mailto:admin@ylsat.com" data-toggle="tooltip" data-placement="bottom" title="admin@ylsat.com">admin@ylsat.com</a></h2>
+                            <a href="mailto:nanfonjin@foxmail.com" data-toggle="tooltip" data-placement="bottom" title="nanfonjin@foxmail.com">nanfonjin@foxmail.com</a></h2>
                     </div>
                 </div>
             </div>
@@ -224,7 +171,7 @@
 </section>
 <footer class="footer">
     <div class="container">
-        <p>&copy; 2016 <a href="">ylsat.com</a> &nbsp; <a href="#" target="_blank" rel="nofollow">豫ICP备20151109-1</a> &nbsp; &nbsp; <a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+        <p>&copy; 2016 <a href="#">ylsat.com</a> &nbsp; <a href="#" target="_blank" rel="nofollow">豫ICP备20151109-1</a> &nbsp; &nbsp; <a href="http://www.baidu.com/" target="_blank">博客</a></p>
     </div>
     <div id="gotop"><a class="gotop"></a></div>
 </footer>
@@ -257,33 +204,6 @@
         </div>
     </div>
 </div>
-<!--登录注册模态框-->
-<div class="modal fade user-select" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form action="/Admin/Index/login" method="post">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="loginModalLabel">登录</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="loginModalUserNmae">用户名</label>
-                        <input type="text" class="form-control" id="loginModalUserNmae" placeholder="请输入用户名" autofocus maxlength="15" autocomplete="off" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="loginModalUserPwd">密码</label>
-                        <input type="password" class="form-control" id="loginModalUserPwd" placeholder="请输入密码" maxlength="18" autocomplete="off" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="submit" class="btn btn-primary">登录</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 <!--右键菜单列表-->
 <div id="rightClickMenu">
     <ul class="list-group rightClickMenuList">
@@ -297,37 +217,17 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.ias.js"></script>
 <script src="js/scripts.js"></script>
+<script src="js/index.js"></script>
 <script src="../layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
-    var index_page=1;//初始页
+    var index_page=0;//初始页
     var index_record=5;//每次记录数
-    $.ajax({
-        url:"/FrontEnd/index.do",
-        data:{},
-        type:"POST",
-        dataType:"JSON",
-        resultType:"JSON",
-        async:true,//异步
-        success:function(data){
-            console.log(data)
-        }
-    });
-function index_query() {
-    index_page=index_page+1;
-    console.log(index_page)
-    $.ajax({
-        url:"/FrontEnd/index.do",
-        data:{"page":index_page,"record":index_record},
-        type:"POST",
-        dataType:"JSON",
-        resultType:"JSON",
-        async:true,//异步
-        success:function(data){
-            console.log(data)
-        }
-    });
-}
+    //初始加载
+    index_query();
+
+
+
 </script>
 
 </body>

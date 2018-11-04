@@ -132,7 +132,7 @@
 </section>
 <footer class="footer">
     <div class="container">
-        <p>&copy; 2016 <a href="">ylsat.com</a> &nbsp; <a href="#" target="_blank" rel="nofollow">豫ICP备20151109-1</a> &nbsp; &nbsp; <a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+        <p>&copy; 2016 <a href="">ylsat.com</a> &nbsp; <a href="#" target="_blank" rel="nofollow">豫ICP备20151109-1</a> &nbsp; &nbsp; <a href="http://www.baidu.com/" target="_blank">博客</a></p>
     </div>
     <div id="gotop"><a class="gotop"></a></div>
 </footer>

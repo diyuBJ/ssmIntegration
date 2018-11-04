@@ -51,19 +51,13 @@
                         </ul>
                     </li>
                 </ul>
-                <a href="javascript:;" class="login" rel="nofollow">Hi,请登录</a>&nbsp;&nbsp;<a href="javascript:;" class="register" rel="nofollow">我要注册</a>&nbsp;&nbsp;<a href="" rel="nofollow">找回密码</a> </div>
+                &nbsp;&nbsp;
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
                 <h1 class="logo hvr-bounce-in"><a href="" title=""><img src="images/log.png" alt=""></a></h1>
             </div>
             <div class="collapse navbar-collapse" id="header-navbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden-index active"><a data-cont="异清轩首页" href="index.jsp">异清轩首页</a></li>
-                    <li><a href="category.jsp">前端技术</a></li>
-                    <li><a href="category.jsp">后端程序</a></li>
-                    <li><a href="category.jsp">管理系统</a></li>
-                    <li><a href="category.jsp">授人以渔</a></li>
-                    <li><a href="category.jsp">程序人生</a></li>
+                <ul class="nav navbar-nav navbar-right" id="tul">
                 </ul>
                 <form class="navbar-form visible-xs" action="/Search" method="post">
                     <div class="input-group">
@@ -80,29 +74,17 @@
     <div class="content-wrap">
         <div class="content">
             <header class="article-header">
-                <h1 class="article-title"><a href="article.jsp">php如何判断一个日期的格式是否正确</a></h1>
+                <h1 class="article-title"><a id="aTitle"></a></h1>
                 <div class="article-meta"> <span class="item article-meta-time">
-          <time class="time" data-toggle="tooltip" data-placement="bottom" title="时间：2016-1-4 10:29:39"><i class="glyphicon glyphicon-time"></i> 2016-1-4 10:29:39</time>
-          </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="来源：第一PHP社区"><i class="glyphicon glyphicon-globe"></i> 第一PHP社区</span> <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title="栏目：后端程序"><i class="glyphicon glyphicon-list"></i> <a href="program" title="">后端程序</a></span> <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title="查看：120"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <span class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title="评论：0"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</span> </div>
+          <time class="time" data-toggle="tooltip" data-placement="bottom" title="" id="aTime"></time>
+          </span> <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title="" id="pName"></span> <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title="" id="aReadingQuantity"></span> </div>
             </header>
             <article class="article-content">
-                <p><img data-original="images/banner/banner_03.jpg" src="images/banner/banner_03.jpg" alt="" /></p>
-                <p> 用php获取上个月最后一天的时间，有两种方法，都非常简单，详细实现源码如下： </p>
-                <pre class="prettyprint lang-php">&lt;?php
-  date_default_timezone_set("PRC"); //设置时区
-  //方法一
-  $times = date("d") * 24 * 3600;
-  echo date("Y-m-d H:i:s", time()-$times);
-  echo '&lt;br/&gt;';
-  //方法二
-  $day = date('d');
-  echo date("Y-m-d H:i:s", strtotime(-$day.' day'));
-?&gt;</pre>
-                <p> 方法一是利用当前时间离本月初有多少时间，然后用当前时间减去这个时间差，就可以得到上月最后一天了。 </p>
-                <p> 方法二是先计算本月多少号，即离月初有多少天，然后用strtotime计算出$day天前的时间戳，也可以得到上个月的最后一天。 </p>
-                <p class="article-copyright hidden-xs">未经允许不得转载：<a href="">异清轩博客</a> » <a href="article.jsp">php如何判断一个日期的格式是否正确</a></p>
+                <p id="aTitleImg"></p>
+                <div id="aContent"></div>
+                <p class="article-copyright hidden-xs">未经允许不得转载：<a target="_blank" href="index.jsp">异清轩博客</a> » <a id="aTitle1"></a></p>
             </article>
-            <div class="article-tags">标签：<a href="" rel="tag">PHP</a></div>
+            <div class="article-tags" id="label">标签：</div>
             <div class="relates">
                 <div class="title">
                     <h3>相关推荐</h3>
@@ -118,44 +100,7 @@
                     <li><a href="article.jsp">php如何判断一个日期的格式是否正确</a></li>
                 </ul>
             </div>
-            <div class="title" id="comment">
-                <h3>评论 <small>抢沙发</small></h3>
-            </div>
-            <!--<div id="respond">
-              <div class="comment-signarea">
-                <h3 class="text-muted">评论前必须登录！</h3>
-                <p> <a href="javascript:;" class="btn btn-primary login" rel="nofollow">立即登录</a> &nbsp; <a href="javascript:;" class="btn btn-default register" rel="nofollow">注册</a> </p>
-                <h3 class="text-muted">当前文章禁止评论</h3>
-              </div>
-            </div>-->
-            <div id="respond">
-                <form action="" method="post" id="comment-form">
-                    <div class="comment">
-                        <div class="comment-title"><img class="avatar" src="images/icon/icon.png" alt="" /></div>
-                        <div class="comment-box">
-                            <textarea placeholder="您的评论可以一针见血" name="comment" id="comment-textarea" cols="100%" rows="3" tabindex="1" ></textarea>
-                            <div class="comment-ctrl"> <span class="emotion"><img src="images/face/5.png" width="20" height="20" alt="" />表情</span>
-                                <div class="comment-prompt"> <i class="fa fa-spin fa-circle-o-notch"></i> <span class="comment-prompt-text"></span> </div>
-                                <input type="hidden" value="1" class="articleid" />
-                                <button type="submit" name="comment-submit" id="comment-submit" tabindex="5" articleid="1">评论</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div id="postcomments">
-                <ol class="commentlist">
-                    <li class="comment-content"><span class="comment-f">#1</span>
-                        <div class="comment-avatar"><img class="avatar" src="images/icon/icon.png" alt="" /></div>
-                        <div class="comment-main">
-                            <p>来自<span class="address">河南郑州</span>的用户<span class="time">(2016-01-06)</span><br />
-                                这是匿名评论的内容这是匿名评论的内容，这是匿名评论的内容这是匿名评论的内容这是匿名评论的内容这是匿名评论的内容这是匿名评论的内容这是匿名评论的内容。</p>
-                        </div>
-                    </li>
-                </ol>
 
-                <div class="quotes"><span class="disabled">首页</span><span class="disabled">上一页</span><a class="current">1</a><a href="">2</a><span class="disabled">下一页</span><span class="disabled">尾页</span></div>
-            </div>
         </div>
     </div>
     <aside class="sidebar">
@@ -163,7 +108,6 @@
             <div class="widget widget-tabs">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#notice" aria-controls="notice" role="tab" data-toggle="tab">网站公告</a></li>
-                    <li role="presentation"><a href="#centre" aria-controls="centre" role="tab" data-toggle="tab">会员中心</a></li>
                     <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">联系站长</a></li>
                 </ul>
                 <div class="tab-content">
@@ -180,13 +124,9 @@
                                 <a target="_blank" href="">在这个小工具中最多可以调用五条</a></li>
                         </ul>
                     </div>
-                    <div role="tabpanel" class="tab-pane centre" id="centre">
-                        <h4>需要登录才能进入会员中心</h4>
-                        <p> <a href="javascript:;" class="btn btn-primary">立即登录</a> <a href="javascript:;" class="btn btn-default">现在注册</a> </p>
-                    </div>
                     <div role="tabpanel" class="tab-pane contact" id="contact">
                         <h2>Email:<br />
-                            <a href="mailto:admin@ylsat.com" data-toggle="tooltip" data-placement="bottom" title="admin@ylsat.com">admin@ylsat.com</a></h2>
+                            <a href="mailto:nanfonjin@foxmail.com" data-toggle="tooltip" data-placement="bottom" title="nanfonjin@foxmail.com">nanfonjin@foxmail.com</a></h2>
                     </div>
                 </div>
             </div>
@@ -222,7 +162,7 @@
 </section>
 <footer class="footer">
     <div class="container">
-        <p>&copy; 2016 <a href="">ylsat.com</a> &nbsp; <a href="#" target="_blank" rel="nofollow">豫ICP备20151109-1</a> &nbsp; &nbsp; <a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+        <p>&copy; 2016 <a href="">ylsat.com</a> &nbsp; <a href="#" target="_blank" rel="nofollow">豫ICP备20151109-1</a> &nbsp; &nbsp; <a href="http://www.baidu.com/" target="_blank">博客</a></p>
     </div>
     <div id="gotop"><a class="gotop"></a></div>
 </footer>
@@ -268,14 +208,7 @@
 <script src="js/jquery.ias.js"></script>
 <script src="js/scripts.js"></script>
 <script src="js/jquery.qqFace.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $('.emotion').qqFace({
-            id : 'facebox',
-            assign:'comment-textarea',
-            path:'/Home/images/arclist/'	//表情存放的路径
-        });
-    });
-</script>
+<script src="js/article.js"></script>
+
 </body>
 </html>

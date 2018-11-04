@@ -21,6 +21,18 @@ public interface ArticleDao {
     List<Map<String,Object>> articleStatisticsSum(@Param("criteria") String criteria);
     /*
      * @Author Uncle Liu
+     * @Description //TODO 分页查询Article根据栏目id
+     * @Date 18:36 2018/10/30
+     **/
+    List<Article> selectArticleByProgramaId(@Param("criteria") String criteria, @Param("page") Integer page, @Param("record") Integer record);
+    /*
+     * @Author Uncle Liu
+     * @Description //TODO 统计文章总记录数根据栏目id
+     * @Date 14:41 2018/11/1
+     **/
+    List<Map<String,Object>> articleByProgramaStatisticsSum(@Param("criteria") String criteria);
+    /*
+     * @Author Uncle Liu
      * @Description //TODO 根据id查询Article
      * @Date 18:36 2018/10/30
      **/
@@ -55,4 +67,10 @@ public interface ArticleDao {
      * @Date 18:37 2018/10/30
      **/
     void updateArticle(Article article);
+    /*
+     * @Author Uncle Liu
+     * @Description //TODO 修改Article阅读量
+     * @Date 18:37 2018/10/30
+     **/
+    int updateArticleAReadingQuantity(@Param("aId")String aId);
 }

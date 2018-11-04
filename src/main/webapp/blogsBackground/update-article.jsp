@@ -34,7 +34,12 @@
                                 测试的文章内容这是测试的文章内容这是测试的文章内容这是测试的文章内容.
                             </textarea>
                             </div>
-
+                        <div class="add-article-box">
+                            <h2 class="add-article-box-title"><span>摘要</span></h2>
+                            <div class="add-article-box-content">
+                                <input type="text" class="form-control" placeholder="输入关键字" name="aAbstract" id="aAbstract" autocomplete="off" class="form-control" required autofocus maxlength="100" >
+                                <span class="prompt-text" id="aAbstract_span">0/100</span> </div>
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <h1 class="page-header">操作</h1>

@@ -23,6 +23,12 @@
 
                             </textarea>
                         </div>
+                        <div class="add-article-box">
+                            <h2 class="add-article-box-title"><span>摘要</span></h2>
+                            <div class="add-article-box-content">
+                                <input type="text" class="form-control" placeholder="输入关键字" name="aAbstract" id="aAbstract" autocomplete="off" class="form-control" required autofocus maxlength="100" >
+                                <span class="prompt-text" id="aAbstract_span">0/100</span> </div>
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <h1 class="page-header">操作</h1>
@@ -67,6 +73,12 @@
             </div>
 
 <script>
+    //摘要输入事件
+    $("#aAbstract").keyup(function () {
+        var s= $("#aAbstract").val();
+        $("#aAbstract_span").html(s.length+"/100");
+
+    })
     //失去焦点事件
     $("#aTitle").blur(function(){
         var value=$(this).val();
@@ -130,14 +142,19 @@
         var pId = $("input[name='programa.pId']:checked").val();
         var title=$("#aTitle").val();
         var label=$("#label").val();
+        var aAbstract=$("#aAbstract").val();
         if (p_desc.getData()=="") {
             layer.msg("内容不能为空");
+            return false;
+        }
+        if (aAbstract.length>100) {
+            layer.msg("摘要只能输入100字");
             return false;
         }
         $.ajax({
             type: "POST",
             url: "/addArticle.do",
-            data : {"aTitle":title,"aContent":p_desc.getData(),"aTitleImg":img,"label":label,"aStatusBar":aStatusBar,"programa.pId":pId},
+            data : {"aTitle":title,"aAbstract":aAbstract,"aContent":p_desc.getData(),"aTitleImg":img,"label":label,"aStatusBar":aStatusBar,"programa.pId":pId},
             success: function(data) {
                 $('#addArticleForm').find('input[type=text],select,input[type=hidden]').each(function() {
                     $(this).val('');

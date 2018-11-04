@@ -98,7 +98,7 @@ public class ArticleController {
         fos.write(file.getBytes());
         fos.flush();
         fos.close();
-        return name;
+        return "/upload/"+sdf.format(new Date())+fileName.substring(fileName.lastIndexOf('.'));
     }
 
     @RequestMapping(value = "/delArticle.do")
