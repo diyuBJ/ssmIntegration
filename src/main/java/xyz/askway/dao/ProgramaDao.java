@@ -25,6 +25,12 @@ public interface ProgramaDao {
     Programa getProgramaById1(Integer pId);
     /*
      * @Author Uncle Liu
+     * @Description //TODO 查询所有Programa不带文章
+     * @Date 18:36 2018/10/30
+     **/
+    List<Programa> queryPrograma();
+    /*
+     * @Author Uncle Liu
      * @Description //TODO 添加Programa
      * @Date 18:37 2018/10/30
      **/

@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon-precomposed" href="images/icon/icon.png">
     <link rel="shortcut icon" href="images/icon/favicon.ico">
     <script src="js/jquery-1.9.1.js" type="text/javascript" charset="utf-8"></script>
-    <script src="layer/layer.js"></script>
+    <script src="../layer/layer.js"></script>
 
     <script src="js/jquery-2.1.4.min.js"></script>
     <!--[if gte IE 9]>

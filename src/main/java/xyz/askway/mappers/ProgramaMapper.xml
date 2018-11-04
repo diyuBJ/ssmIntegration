@@ -19,12 +19,16 @@
     <select id="selectPrograma"  resultMap="programaMapper">
           select p_id,p_name,p_alias,p_state from  programa order by p_id asc
      </select>
-    <!--根据id查询-->
-    <select id="getProgramaById1" parameterType="Integer" resultMap="oneprograma">
-         select p_id,p_name,p_alias,p_state from  programa where p_id=#{pId} order by p_id asc
+    <!--查询所有不带文章-->
+    <select id="queryPrograma" resultMap="oneprograma">
+         select p_id,p_name,p_alias,p_state from  programa order by p_id asc
      </select>
     <!--根据id查询-->
-    <select id="getProgramaById" parameterType="Integer" resultMap="programaMapper">
+    <select id="getProgramaById" parameterType="Integer" resultMap="oneprograma">
+        select p_id,p_name,p_alias,p_state from  programa where p_id=#{pId} order by p_id asc
+     </select>
+    <!--根据id查询-->
+    <select id="getProgramaById1" parameterType="Integer" resultMap="programaMapper">
         select p_id,p_name,p_alias,p_state from  programa where p_id=#{pId} order by p_id asc
      </select>
     <!--增加-->

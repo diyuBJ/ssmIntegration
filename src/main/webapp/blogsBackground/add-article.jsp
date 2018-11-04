@@ -139,14 +139,16 @@
             url: "/addArticle.do",
             data : {"aTitle":title,"aContent":p_desc.getData(),"aTitleImg":img,"label":label,"aStatusBar":aStatusBar,"programa.pId":pId},
             success: function(data) {
+                $('#addArticleForm').find('input[type=text],select,input[type=hidden]').each(function() {
+                    $(this).val('');
+                });
+                layer.msg("添加文章成功")
+                $("#main").html("");
+                $("#main").load("/getArticle.do");
             }
         });
-        $('#addArticleForm').find('input[type=text],select,input[type=hidden]').each(function() {
-            $(this).val('');
-        });
-        layer.msg("添加文章成功")
-        $("#main").html("");
-        $("#main").load("article.jsp");
+
+
         return false; // 必须返回false，否则表单会自己再做一次提交操作，并且页面跳转
     }
 

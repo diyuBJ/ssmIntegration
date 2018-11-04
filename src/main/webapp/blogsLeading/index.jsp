@@ -28,6 +28,8 @@
     <script src="js/html5shiv.min.js" type="text/javascript"></script>
     <script src="js/respond.min.js" type="text/javascript"></script>
     <script src="js/selectivizr-min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+    <script src="../layui/layui.js" charset="utf-8"></script>
     <![endif]-->
     <!--[if lt IE 9]>
     <script>window.location.href='upgrade-browser.jsp';</script>
@@ -108,7 +110,7 @@
             </article>
             <div class="title">
                 <h3>最新发布</h3>
-                <div class="more"><a href="">PHP</a><a href="">JavaScript</a><a href="">EmpireCMS</a><a href="">Apache</a><a href="">MySQL</a></div>
+                <%--<div class="more"><a href="">PHP</a><a href="">JavaScript</a><a href="">EmpireCMS</a><a href="">Apache</a><a href="">MySQL</a></div>--%>
             </div>
             <article class="excerpt excerpt-1"><a class="focus" href="article.jsp" title=""><img class="thumb" data-original="images/excerpt.jpg" src="images/excerpt.jpg" alt=""></a>
                 <header><a class="cat" href="program">后端程序<i></i></a>
@@ -155,15 +157,7 @@
                     <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共120人围观</span> <a class="comment" href="article.jsp#comment"><i class="glyphicon glyphicon-comment"></i> 0个不明物体</a></p>
                 <p class="note">可以用strtotime()把日期（$date）转成时间戳，再用date()按需要验证的格式转成一个日期，来跟$date比较是否相同来验证这个日期的格式是否是正确的。所以要验证日期格式 ... </p>
             </article>
-            <nav class="pagination" style="display: none;">
-                <ul>
-                    <li class="prev-page"></li>
-                    <li class="active"><span>1</span></li>
-                    <li><a href="?page=2">2</a></li>
-                    <li class="next-page"><a href="?page=2">下一页</a></li>
-                    <li><span>共 2 页</span></li>
-                </ul>
-            </nav>
+            <a href="javascript:index_query();" >点击加载更多</a>
         </div>
     </div>
     <aside class="sidebar">
@@ -303,5 +297,38 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.ias.js"></script>
 <script src="js/scripts.js"></script>
+<script src="../layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    var index_page=1;//初始页
+    var index_record=5;//每次记录数
+    $.ajax({
+        url:"/FrontEnd/index.do",
+        data:{},
+        type:"POST",
+        dataType:"JSON",
+        resultType:"JSON",
+        async:true,//异步
+        success:function(data){
+            console.log(data)
+        }
+    });
+function index_query() {
+    index_page=index_page+1;
+    console.log(index_page)
+    $.ajax({
+        url:"/FrontEnd/index.do",
+        data:{"page":index_page,"record":index_record},
+        type:"POST",
+        dataType:"JSON",
+        resultType:"JSON",
+        async:true,//异步
+        success:function(data){
+            console.log(data)
+        }
+    });
+}
+</script>
+
 </body>
 </html>

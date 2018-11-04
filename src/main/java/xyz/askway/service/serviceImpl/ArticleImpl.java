@@ -29,7 +29,8 @@ public class ArticleImpl implements ArticleService {
         try{
             return articleDao.selectArticle(criteria,page==0?0:(page-1)*record,record);
         }catch(Exception e){
-            Log4j2Controller.error("错误：execute Line 30 'return articleDao.selectArticle(criteria，page,record);' ERROR.");
+            e.printStackTrace();
+            Log4j2Controller.error("错误：execute Line 30 xyz.askway.service.serviceImpl.ArticleImpl.selectArticle 'return articleDao.selectArticle(criteria，page,record);' ERROR.");
         }
         return null;
     }

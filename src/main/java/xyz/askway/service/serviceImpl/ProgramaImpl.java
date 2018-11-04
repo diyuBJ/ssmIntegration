@@ -31,6 +31,14 @@ public class ProgramaImpl implements ProgramaService {
     public Programa getProgramaById1(Integer pId) {
         return programaDao.getProgramaById1(pId);
     }
+    /*
+     * @Author Uncle Liu
+     * @Description //TODO 查询所有Programa不带文章
+     * @Date 18:36 2018/10/30
+     **/
+    public List<Programa> queryPrograma(){
+        return programaDao.queryPrograma();
+    }
 
     @Override
     public void addPrograma(Programa programa) {
